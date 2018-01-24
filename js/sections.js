@@ -67,10 +67,10 @@ var scrollVis = function () {
       'bruegel', 'hyperborea', 'mask2', 'lgm', 'dirtyice'],
       img_x = [325, 270, 400, 340, 228, 370, 240, 240, 380, 300, 350],
       img_y = [100, 120, 100, 120, 126, 50, 30, 60, 43, 60, 40],
-      arrow_x = [100, 68, 165, 191, 298, 182, 2, 2, 2, 2, 250, 2, 
-      335, 142, 146, 2, 107, 2, 2, 86],
-      arrow_y = [430, 311, 407, 311, 343, 343, 343, 375, 343, 375, 343, 343, 
-      375, 375, 375, 375, 375, 311, 407, 439],
+      arrow_x = [100, 2, 2, 96, 213, 2, 304, 156, 308, 300, 2, 343, 
+      308, 345, 221, 250, 252, 2, 233, 319],
+      arrow_y = [430, 307, 399, 307, 338, 338, 307, 338, 307, 338, 338, 307, 
+      368, 338, 338, 338, 338, 307, 368, 399],
       fRead = [1,5,9,14,15,19],
       fRead_y = [510, 530, 530, 400, 510, 488];
 
@@ -85,7 +85,7 @@ var scrollVis = function () {
       .attr('class', function(d, i) {return 'slide'+img_slides[i]+' img'})
       .attr('xlink:href', function(d,i) {return 'images/'+img_names[i]+'.jpg'})
       .attr('x', function(d,i) {return img_x[i]})
-      .attr('y', function(d,i) {return img_y[i]})
+      .attr('y', function(d,i) {return img_y[i]+60})
       .attr('width', function(d,i) {return (width-img_x[i])})
       .on("mouseover", handleMouseOver)
       .on("mouseout", handleMouseOut)
@@ -96,7 +96,7 @@ var scrollVis = function () {
       .enter()
       .append('text')
       .attr('class', function(d, i) {return 'slide'+i+' eventDepth'})
-      .attr('y', (height / 31))
+      .attr('y', (height / 31)+60)
       // .attr('y', (height / 10.8))
       .attr('x', 6)
       .text(function(d) {
@@ -109,7 +109,7 @@ var scrollVis = function () {
       .enter()
       .append('text')
       .attr('class', function(d, i) {return 'slide'+i+' eventYear'})
-      .attr('y', (height / 10.8))
+      .attr('y', (height / 10.8)+60)
       // .attr('y', (height / 24))
       .attr('x', 6)
       .text(function(d) { var showYear = d.start >= 0 ? d.start : -d.start+' BC';
@@ -121,7 +121,7 @@ var scrollVis = function () {
       .enter()
       .append('text')
       .attr('class', function(d, i) {return 'slide'+i+' title'})
-      .attr('y',  (height / 5))
+      .attr('y',  (height / 5)+60)
       .attr('x', width / 3)
       .text(function(d) {return d.id})
       .call(wrap, 400)
@@ -131,7 +131,7 @@ var scrollVis = function () {
       .data(timelineData)
       .enter()
       .append('foreignObject')
-        .attr('y', (height / 2.42))
+        .attr('y', (height / 2.42)+60)
         .attr("width", 500)
         .attr("height", 300)
         .attr('class', function(d, i) {return 'slide'+i+' fRead fR'})
@@ -143,7 +143,7 @@ var scrollVis = function () {
       .data(timelineData)
       .enter()
       .append('foreignObject')
-        .attr('y', (height / 2.42))
+        .attr('y', (height / 2.42)+60)
         .attr("width", 510)
         .attr("height", 300)
         .attr('class', function(d, i) {return 'slide'+i+' desc'})
@@ -155,7 +155,7 @@ var scrollVis = function () {
       .data(timelineData)
       .enter()
       .append('foreignObject')
-        .attr('y', (height / 2.42))
+        .attr('y', (height / 2.42)+60)
         .attr("width", 510)
         .attr("height", 300)
         .attr('class', function(d, i) {return 'slide'+i+' quote'})
@@ -170,7 +170,7 @@ var scrollVis = function () {
       .attr('class', function(d, i) {return 'slide'+i+' arrow'})
       .attr('xlink:href', '../images/Read-More5.svg')
       .attr('x', function(d, i) {return arrow_x[i]-11})
-      .attr('y', function(d, i) {return arrow_y[i]+1})
+      .attr('y', function(d, i) {return arrow_y[i]+1+60})
       .on("click", function(d, i){
         var sClass = '.slide'+i;
         g.selectAll(sClass).filter('.quote,.arrow')
@@ -194,7 +194,7 @@ var scrollVis = function () {
       .attr('class', function(d, i) {return 'slide'+d+' fReadArrow fR'})
       .attr('xlink:href', '../images/Further-Reading2.svg')
       .attr('x', -4)
-      .attr('y', function(d, i) {return fRead_y[i]+1})
+      .attr('y', function(d, i) {return fRead_y[i]+1+60})
       .on("click", function(d, i){
         var sClass = '.slide'+d;
         g.selectAll(sClass).filter('.desc,.fReadArrow')
