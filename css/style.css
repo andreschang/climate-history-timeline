@@ -1,0 +1,135 @@
+@import url("//hello.myfonts.net/count/359f76");
+
+@font-face {
+  font-family: 'Shift';
+  src:  url('webfonts/Shift-Bold.eot');
+  src:  url('webfonts/Shift-Bold.woff2') format('woff2'),
+        url('webfonts/Shift-Bold.woff') format('woff');
+}
+  
+@font-face {font-family: 'ProximaNova-Bold';src: url('webfonts/359F76_0_0.eot');src: url('webfonts/359F76_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_0_0.woff2') format('woff2'),url('webfonts/359F76_0_0.woff') format('woff'),url('webfonts/359F76_0_0.ttf') format('truetype');}
+@font-face {font-family: 'ProximaNova-Light';src: url('webfonts/359F76_1_0.eot');src: url('webfonts/359F76_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_1_0.woff2') format('woff2'),url('webfonts/359F76_1_0.woff') format('woff'),url('webfonts/359F76_1_0.ttf') format('truetype');}
+@font-face {font-family: 'ProximaNova-Medium';src: url('webfonts/359F76_2_0.eot');src: url('webfonts/359F76_2_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_2_0.woff2') format('woff2'),url('webfonts/359F76_2_0.woff') format('woff'),url('webfonts/359F76_2_0.ttf') format('truetype');}
+@font-face {font-family: 'ProximaNova-MediumIt';src: url('webfonts/359F76_3_0.eot');src: url('webfonts/359F76_3_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_3_0.woff2') format('woff2'),url('webfonts/359F76_3_0.woff') format('woff'),url('webfonts/359F76_3_0.ttf') format('truetype');}
+@font-face {font-family: 'ProximaNova-Regular';src: url('webfonts/359F76_4_0.eot');src: url('webfonts/359F76_4_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_4_0.woff2') format('woff2'),url('webfonts/359F76_4_0.woff') format('woff'),url('webfonts/359F76_4_0.ttf') format('truetype');}   
+@font-face {font-family: 'ProximaNova-SemiboldIt';src: url('webfonts/359F76_5_0.eot');src: url('webfonts/359F76_5_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_5_0.woff2') format('woff2'),url('webfonts/359F76_5_0.woff') format('woff'),url('webfonts/359F76_5_0.ttf') format('truetype');}
+ 
+
+.container {
+  width: 800;
+}
+
+#graphic {
+  padding-top: 60px;
+  font-family: 'ProximaNova-Regular', sans-serif;
+  font-size: 100%;
+}
+
+#miniTL {
+  display: inline-block;
+  position: fixed;
+  width: 80;
+  z-index: 80;
+  font-size: 0.9em;
+  font-weight: 300;
+  fill: #f6a355;
+  text-anchor: middle;
+  /*background: #a4abb5;*/
+}
+
+#sections {
+  position: relative;
+  display: inline-block;
+  width: 260px;
+  top: 0px;
+  z-index: 90;
+  padding-bottom: 200px;
+  padding-right: 20px;
+  /*opacity: .5;*/
+  /*background: #a4abb5;*/
+}
+
+#extra-space {
+  height: 300px;
+}
+
+#vis {
+  display: inline-block;
+  position: fixed;
+  top: 60px;
+  z-index: 1;
+  margin-left: 0;
+  /* height: 600px; */
+  /* width: 600px; */
+  /* background-color: #ddd; */
+}
+
+#vis .eventYear{
+  font-family: 'ProximaNova-Regular', sans-serif;
+  font-size:1.7em;
+  fill: #f6a355;
+  text-anchor: left;
+}
+
+#vis .eventDepth{
+  font-family: 'ProximaNova-Regular', sans-serif;
+  font-size:1.1em;
+  font-weight: 300;
+  fill: #f6a355;
+  text-anchor: left;
+}
+
+#vis .title {
+  font-family: Shift;
+  font-size:2.8em;
+  /*font-weight: 500;*/
+  /*text-anchor: middle;*/
+}
+
+
+#vis .desc{
+  font-family: 'ProximaNova-Regular', sans-serif;
+  font-size:1.15em;
+  line-height: 1.2em;
+  text-anchor: left;
+}
+
+#vis h1 {
+  font-family: 'ProximaNova-Medium', sans-serif;
+  font-size:1.3em;
+  line-height: 1.4em;
+}
+
+#vis .quote {
+  /*font-family: 'Lato', sans-serif;*/
+  font-family: 'ProximaNova-MediumIt', sans-serif;
+  font-size:1.7em;
+  line-height: 1.2em;
+  text-anchor: left;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #666;
+  shape-rendering: crispEdges;
+}
+
+.event0 {
+  fill: #719FA3;
+  opacity: 0.5;
+}
+
+.event1 {
+  fill: #409BA3;
+  opacity: 0.5;
+}
+
+.event2 {
+  fill: #577A7D;
+  opacity: 0.5;
+}
+
+.event0-1000000 {
+  fill: url(#endGrad);
+}
