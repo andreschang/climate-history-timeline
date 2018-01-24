@@ -11,6 +11,7 @@ var scrollVis = function () {
   // and margins of the vis area.
   var width = 560;
   var height = 520;
+  var top_height = 580;
   var margin = { top: 0, left: 10, bottom: 40, right: 10 };
 
   var lastIndex = -1;
@@ -38,7 +39,7 @@ var scrollVis = function () {
       svg = svg.merge(svgE);
 
       svg.attr('width', width + margin.left + margin.right);
-      svg.attr('height', height + margin.top + margin.bottom);
+      svg.attr('height', top_height + margin.top + margin.bottom);
 
       svg.append('g');
 
