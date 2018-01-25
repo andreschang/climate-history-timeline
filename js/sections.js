@@ -220,7 +220,8 @@ var scrollVis = function () {
     g.selectAll('.slide8').filter('.eventYear').text('Early 1800s');
     g.selectAll('.slide9').filter('.eventYear').text('1500-1800');
     g.selectAll('.slide10').filter('.eventYear').text('1300-1850');
-    g.selectAll('.slide0').filter('.arrow').remove();
+    g.selectAll('.slide0').filter('.arrow').remove()
+    g.selectAll('.slide19').filter('.eventYear').text('3000000 BC');
 
     };
 

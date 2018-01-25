@@ -123,13 +123,19 @@ var axis0 = d3.axisLeft(scale0)
 var axis1 = d3.axisLeft(scale1)
   .ticks(20, "f");
 var axis2 = d3.axisLeft(scale2)
-  .ticks(20, "f");
+  .ticks(20, "f")
+  .tickFormat(function(d) {var showYear0 = d >= 0 ? d3.format(".0f")(d) : -d3.format(".0f")(d)+' BC';
+        return( showYear0 )});
 var axis3 = d3.axisLeft(scale3)
   // .ticks(20, ".2s");
-  .ticks(10, "f");
+  .ticks(10)
+  .tickFormat(function(d) {var showYear0 = d >= 0 ? d3.format(".0f")(d) : -d3.format(".0f")(d)+' BC';
+        return( showYear0 )});
 var axis4 = d3.axisLeft(scale4)
   // .ticks(20, ".2s");
-  .ticks(10, "f");
+  .ticks(10)
+  .tickFormat(function(d) {var showYear0 = d >= 0 ? d3.format(".0f")(d) : -d3.format(".0f")(d)+' BC';
+        return( showYear0 )});
 
 // minor ticks
 // var axis2m = d3.axisLeft(scale2)
