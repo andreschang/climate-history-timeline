@@ -16,7 +16,7 @@ var mTop = 50,
   m = 15,
   mLeft = 30,
   mainHeight = 6000 - mTop-m,
-  miniHeight = 500 - mTop-m,
+  miniHeight = 470 - mTop-m,
   miniWidth = 70 - 2*m,
   mainWidth = 220 - miniWidth;
 
