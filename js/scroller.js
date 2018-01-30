@@ -105,11 +105,15 @@ function scroller() {
       .attr("transform", "translate(0,"+boxMultiScale((yLoc+5))+")");
     d3.select("#miniYear")
       .text(function() {
-        var year = yearMultiScale((yLoc+5));
+        var adj = yLoc <= 5400 ? 5 : 150;
+        var year = yearMultiScale((yLoc+adj));
+        console.log(year)
+        console.log(yLoc)
         var showYear = year >= 0 ? d3.format(".0f")(year) : -d3.format(".0f")(year)+' BC';
+        var showYear2 = year >= -1000000 ? showYear : '1000000+ BC';
         var depth = (year <= 1988 && year >= -237000) ? dMultiScale((year)) : '1';
         var showDepth = depth <= 0 ? ' / '+d3.format(".0f")(depth)+' m' : '';
-        return( showYear+showDepth);
+        return( showYear2+showDepth);
       });
 
     if (currentIndex !== sectionIndex) {
