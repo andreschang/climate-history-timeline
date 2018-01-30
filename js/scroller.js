@@ -107,7 +107,7 @@ function scroller() {
       .text(function() {
         var year = yearMultiScale((yLoc+5));
         var showYear = year >= 0 ? d3.format(".0f")(year) : -d3.format(".0f")(year)+' BC';
-        var depth = (year <= 1988 && year >= -130000) ? dMultiScale((year)) : '1';
+        var depth = (year <= 1988 && year >= -237000) ? dMultiScale((year)) : '1';
         var showDepth = depth <= 0 ? ' / '+d3.format(".0f")(depth)+' m' : '';
         return( showYear+showDepth);
       });

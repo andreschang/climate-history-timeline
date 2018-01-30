@@ -93,7 +93,7 @@ var dScale0 = d3.scaleLinear().range([-6.00, -69.25]).domain([1988, 1800]),
   dScale3 = d3.scaleLinear().range([-1737, -2027]).domain([-9000, -22000]),
   dScale4 = d3.scaleLinear().range([-1999, -2426]).domain([-22000, -48000]),
   dScale5 = d3.scaleLinear().range([-2426, -2768]).domain([-48000, -100000]),
-  dScale6 = d3.scaleLinear().range([-2768, -3005]).domain([-48000, -100000]);
+  dScale6 = d3.scaleLinear().range([-2768, -3005]).domain([-48000, -237000]);
 
 function dMultiScale(inputNumber) {
       if (1800 <= inputNumber && inputNumber <= 1988) {
@@ -108,7 +108,7 @@ function dMultiScale(inputNumber) {
         return dScale4(inputNumber);}
       else if (-100000 <= inputNumber && inputNumber < -48000) {
         return dScale5(inputNumber);}
-      else if (-130000 <= inputNumber && inputNumber < -100000) {
+      else if (-237000 <= inputNumber && inputNumber < -100000) {
         return dScale6(inputNumber);}
       // } else if (bounds[1] <= inputNumber && inputNumber < bounds[2]) {
       //   return scale1.invert(inputNumber);
@@ -302,7 +302,8 @@ d3.tsv("web_timeline.4.5.tsv", function(items) {
 
   miniLocator.append("text")
     .attr("id", "miniYear")
-    .attr("transform", "translate(-8,2)rotate(-90)");
+    // .attr("transform", "translate(-8,2)rotate(-90)");
+    .attr("transform", "translate(-8,6)rotate(-90)");
 
   // d3.selectAll(".event0-1000000").filter(".miniEvent")
   //   .attr("height", (86.8246-16));
