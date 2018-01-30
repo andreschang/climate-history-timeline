@@ -32,9 +32,6 @@ var scale0 = d3.scaleLinear().domain([tf[0], tf[1]]).range([scaleDom[0],scaleDom
   scale3 = d3.scaleLinear().domain([tf[3], tf[4]]).range([scaleDom[3],scaleDom[4]]),
   scale4 = d3.scaleLinear().domain([tf[4], tf[5]]).range([scaleDom[4],scaleDom[5]]);
 
-var depth0 = [1, 1, 1, 1, -6.04, -10.83, -14.93, -19.19, -23.29, -27.03, -30.45, -33.90, 
--36.85, -40.22, -43.49, -46.87, -49.77, -52.95, -55.64, -58.78, -61.85, -64.47, -67.37];
-
 var y2 = d3.scaleLinear()
   .domain([timeEnd, tf[5]])
   .range([0, miniHeight]);
@@ -88,6 +85,40 @@ function yearMultiScale(inputNumber) {
       } else if (inputNumber >= bounds[4]) {
         return scale4.invert(inputNumber);
       };
+};
+
+var dScale0 = d3.scaleLinear().range([-6.00, -69.25]).domain([1988, 1800]),
+  dScale1 = d3.scaleLinear().range([-76.93, -477.88]).domain([1800, 0]),
+  dScale2 = d3.scaleLinear().range([-557, -1737]).domain([0, -9000]),
+  dScale3 = d3.scaleLinear().range([-1737, -2027]).domain([-9000, -22000]),
+  dScale4 = d3.scaleLinear().range([-1999, -2426]).domain([-22000, -48000]),
+  dScale5 = d3.scaleLinear().range([-2426, -2768]).domain([-48000, -100000]),
+  dScale6 = d3.scaleLinear().range([-2768, -3005]).domain([-48000, -100000]);
+
+function dMultiScale(inputNumber) {
+      if (1800 <= inputNumber && inputNumber <= 1988) {
+        return dScale0(inputNumber);}
+      else if (0 <= inputNumber && inputNumber < 1800) {
+        return dScale1(inputNumber);}
+      else if (-9000 <= inputNumber && inputNumber < 0) {
+        return dScale2(inputNumber);}
+      else if (-22000 <= inputNumber && inputNumber < -9000) {
+        return dScale3(inputNumber);}
+      else if (-48000 <= inputNumber && inputNumber < -22000) {
+        return dScale4(inputNumber);}
+      else if (-100000 <= inputNumber && inputNumber < -48000) {
+        return dScale5(inputNumber);}
+      else if (-130000 <= inputNumber && inputNumber < -100000) {
+        return dScale6(inputNumber);}
+      // } else if (bounds[1] <= inputNumber && inputNumber < bounds[2]) {
+      //   return scale1.invert(inputNumber);
+      // } else if (bounds[2] <= inputNumber && inputNumber < bounds[3]) {
+      //   return scale2.invert(inputNumber);
+      // } else if (bounds[3] <= inputNumber && inputNumber < bounds[4]) {
+      //   return scale3.invert(inputNumber);
+      // } else if (inputNumber >= bounds[4]) {
+      //   return scale4.invert(inputNumber);
+      // };
 };
 
 // }
@@ -196,12 +227,6 @@ d3.tsv("web_timeline.4.5.tsv", function(items) {
     .attr("transform", "translate(20,0)")
     .call(axis0)
     .select(".domain").remove();
-
-  // mainTL.append("g")
-  //   .attr("class", "axis")
-  //   .attr("transform", "translate(100,0)")
-  //   .call(axis0d)
-  //   .select(".domain").remove();
 
   mainTL.append("g")
     .attr("class", "axis")
