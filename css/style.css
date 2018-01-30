@@ -39,7 +39,7 @@
   padding-right:10px;
   padding-left:24px;
   overflow:hidden;
-  font-family: 'ProximaNova-Bold';
+  font-family: 'ProximaNova-Bold', sans-serif;
   color: #577A7D;
   z-index: 100;
 }
@@ -107,7 +107,6 @@
   z-index: 1;
   margin-left: 0;
   /* height: 600px; */
-  /* width: 600px; */
   /* background-color: #ddd; */
 }
 

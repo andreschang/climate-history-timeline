@@ -11,7 +11,6 @@ var scrollVis = function () {
   // and margins of the vis area.
   var width = 560;
   var height = 520;
-  // var top_height = 630;
   var top_height = 630;
   var margin = { top: 0, left: 10, bottom: 40, right: 10 };
 
@@ -67,6 +66,8 @@ var scrollVis = function () {
       'bruegel', 'hyperborea', 'mask2', 'lgm', 'dirtyice'],
       lBox_names = ['iceloss2', 'shuvinai', 'gisp2_crop', 'northpole2', 'church', 'woodmap',
       'bruegel', 'hyperborea', 'mask2', 'lgm', 'dirtyice'],
+      img_dims = [[365, 564],[800,599],[331,574],[902,1200],[880,501],[286,553],[629,453],
+      [720,668],[477,742],[1000,966],[850,1269]],
       img_x = [325, 270, 400, 340, 228, 370, 240, 240, 380, 300, 350],
       img_y = [100, 120, 100, 120, 126, 50, 30, 60, 43, 60, 40],
       arrow_x = [100, 2, 2, 96, 213, 2, 304, 156, 308, 300, 2, 343, 
@@ -89,6 +90,7 @@ var scrollVis = function () {
       .attr('x', function(d,i) {return img_x[i]})
       .attr('y', function(d,i) {return img_y[i]+100})
       .attr('width', function(d,i) {return (width-img_x[i])})
+      .attr('height', function(d,i) {return ((width-img_x[i])*img_dims[i][1]/img_dims[i][0])})
       .on("mouseover", handleMouseOver)
       .on("mouseout", handleMouseOut)
       .style('opacity', 0);
