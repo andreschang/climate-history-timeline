@@ -1,4 +1,4 @@
-@import url("//hello.myfonts.net/count/359f76");
+@import url("/count/35add2");
 
 @font-face {
   font-family: 'Shift';
@@ -6,14 +6,13 @@
   src:  url('webfonts/Shift-Bold.woff2') format('woff2'),
         url('webfonts/Shift-Bold.woff') format('woff');
 }
-  
-@font-face {font-family: 'ProximaNova-Bold';src: url('webfonts/359F76_0_0.eot');src: url('webfonts/359F76_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_0_0.woff2') format('woff2'),url('webfonts/359F76_0_0.woff') format('woff'),url('webfonts/359F76_0_0.ttf') format('truetype');}
-@font-face {font-family: 'ProximaNova-Light';src: url('webfonts/359F76_1_0.eot');src: url('webfonts/359F76_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_1_0.woff2') format('woff2'),url('webfonts/359F76_1_0.woff') format('woff'),url('webfonts/359F76_1_0.ttf') format('truetype');}
-@font-face {font-family: 'ProximaNova-Medium';src: url('webfonts/359F76_2_0.eot');src: url('webfonts/359F76_2_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_2_0.woff2') format('woff2'),url('webfonts/359F76_2_0.woff') format('woff'),url('webfonts/359F76_2_0.ttf') format('truetype');}
-@font-face {font-family: 'ProximaNova-MediumIt';src: url('webfonts/359F76_3_0.eot');src: url('webfonts/359F76_3_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_3_0.woff2') format('woff2'),url('webfonts/359F76_3_0.woff') format('woff'),url('webfonts/359F76_3_0.ttf') format('truetype');}
-@font-face {font-family: 'ProximaNova-Regular';src: url('webfonts/359F76_4_0.eot');src: url('webfonts/359F76_4_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_4_0.woff2') format('woff2'),url('webfonts/359F76_4_0.woff') format('woff'),url('webfonts/359F76_4_0.ttf') format('truetype');}   
-@font-face {font-family: 'ProximaNova-SemiboldIt';src: url('webfonts/359F76_5_0.eot');src: url('webfonts/359F76_5_0.eot?#iefix') format('embedded-opentype'),url('webfonts/359F76_5_0.woff2') format('woff2'),url('webfonts/359F76_5_0.woff') format('woff'),url('webfonts/359F76_5_0.ttf') format('truetype');}
- 
+
+@font-face {font-family: 'ProximaNova-Bold';src: url('webfonts/35ADD2_0_0.eot');src: url('webfonts/35ADD2_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_0_0.woff2') format('woff2'),url('webfonts/35ADD2_0_0.woff') format('woff'),url('webfonts/35ADD2_0_0.ttf') format('truetype');}  
+@font-face {font-family: 'ProximaNova-Medium';src: url('webfonts/35ADD2_1_0.eot');src: url('webfonts/35ADD2_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_1_0.woff2') format('woff2'),url('webfonts/35ADD2_1_0.woff') format('woff'),url('webfonts/35ADD2_1_0.ttf') format('truetype');}
+@font-face {font-family: 'ProximaNova-MediumIt';src: url('webfonts/35ADD2_2_0.eot');src: url('webfonts/35ADD2_2_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_2_0.woff2') format('woff2'),url('webfonts/35ADD2_2_0.woff') format('woff'),url('webfonts/35ADD2_2_0.ttf') format('truetype');} 
+@font-face {font-family: 'ProximaNova-Regular';src: url('webfonts/35ADD2_3_0.eot');src: url('webfonts/35ADD2_3_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_3_0.woff2') format('woff2'),url('webfonts/35ADD2_3_0.woff') format('woff'),url('webfonts/35ADD2_3_0.ttf') format('truetype');}
+@font-face {font-family: 'ProximaNova-Semibold';src: url('webfonts/35ADD2_4_0.eot');src: url('webfonts/35ADD2_4_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_4_0.woff2') format('woff2'),url('webfonts/35ADD2_4_0.woff') format('woff'),url('webfonts/35ADD2_4_0.ttf') format('truetype');}
+@font-face {font-family: 'ProximaNova-SemiboldIt';src: url('webfonts/35ADD2_5_0.eot');src: url('webfonts/35ADD2_5_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_5_0.woff2') format('woff2'),url('webfonts/35ADD2_5_0.woff') format('woff'),url('webfonts/35ADD2_5_0.ttf') format('truetype');}
 
 .container {
   width: 100%;
@@ -153,6 +152,18 @@
   font-size:1.55em;
   line-height: 1.25em;
   text-anchor: left;
+}
+
+#vis .arrow {
+  font-family: 'ProximaNova-Semibold', sans-serif;
+  font-size: 1.28em;
+  fill: #f6a355;
+}
+
+#vis .fReadArrow {
+  font-family: 'ProximaNova-Semibold', sans-serif;
+  font-size: 1.08em;
+  fill: #a9a9aa;
 }
 
 .axis path,

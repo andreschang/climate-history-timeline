@@ -11,12 +11,11 @@ var scrollVis = function () {
   // and margins of the vis area.
   var width = 560;
   var height = 520;
-  var top_height = 630;
+  var top_height = 704;
   var margin = { top: 0, left: 10, bottom: 40, right: 10 };
 
   var lastIndex = -1;
   var activeIndex = 0;
-
 
   var svg = null;
   var g = null;
@@ -25,12 +24,11 @@ var scrollVis = function () {
   var updateFunctions = [];
 
   /**
-   * chart
-   *
-   * @param selection - the current d3 selection(s)
-   *  to draw the visualization in.
+   * Sets up SVG group that panels
+   * will display in
    */
-  var chart = function (selection) {
+
+  var panelGroup = function (selection) {
     selection.each(function (timelineData) {
       // create svg and give it a width and height
       svg = d3.select(this).selectAll('svg').data([timelineData]);
@@ -61,6 +59,19 @@ var scrollVis = function () {
 
   var setupVis = function (timelineData) {
 
+    // Here is where all of the image data and custom placements are defined
+
+    // img_slides is the slide that each image shows up in (ex. the 5th image, 'church')
+    // shows up in slide 6
+
+    // img_names is filename (w/o .jpg extension) of image loaded in panel
+    // lBox_names is filename of image that loads in LightBox (usually the same as img_names)
+    // img_dims is the original image's dimensions in pixels [Width,Height]
+    // img_x and img_y are target placement of image in event panel
+    // fRead is the list of slides with "further reading" info loaded in
+    // arrow_x, arrow_y, and fRead_y are placement parameters.
+    // arrows all need to be shifted manually when description lengths are changes (sorry!)
+
     var img_slides = [1, 2, 3, 4, 6, 8, 10, 12, 13, 15, 18],
       img_names = ['iceloss_crop', 'shuvinai', 'gisp2_crop', 'northpole2', 'church', 'woodmap',
       'bruegel', 'hyperborea', 'mask2', 'lgm', 'dirtyice'],
@@ -74,8 +85,8 @@ var scrollVis = function () {
       308, 345, 221, 250, 252, 2, 233, 319],
       arrow_y = [430, 307, 399, 307, 338, 338, 307, 338, 307, 338, 338, 307, 
       368, 338, 338, 338, 338, 307, 368, 399],
-      fRead = [1,5,9,14,15,19],
-      fRead_y = [510, 530, 530, 400, 510, 488];
+      fRead = [1,5,9,14,15,19];
+      // fRead_y = [510, 530, 530, 400, 510, 488];
 
     g.append('g').selectAll('img')
       .data(img_slides)
@@ -137,7 +148,7 @@ var scrollVis = function () {
       .append('foreignObject')
         .attr('y', (height / 2.42)+100)
         .attr("width", 500)
-        .attr("height", 300)
+        .attr("height", 500)
         .attr('class', function(d, i) {return 'slide'+i+' fRead fR'})
         .style('opacity', 0)
       .append('xhtml:div')
@@ -149,7 +160,7 @@ var scrollVis = function () {
       .append('foreignObject')
         .attr('y', (height / 2.42)+100)
         .attr("width", 510)
-        .attr("height", 300)
+        .attr("height", 306)
         .attr('class', function(d, i) {return 'slide'+i+' desc'})
         .style('opacity', 0)
       .append('xhtml:div')
@@ -170,35 +181,42 @@ var scrollVis = function () {
     g.append('g').selectAll('arrows')
       .data(timelineData)
       .enter()
-      .append('svg:image')
+      .append('text')
+      .text('READ MORE')
+      // .append('svg:image')
+      // .attr('xlink:href', '../images/Read-More5.svg')
       .attr('class', function(d, i) {return 'slide'+i+' arrow'})
-      .attr('xlink:href', '../images/Read-More5.svg')
-      .attr('x', function(d, i) {return arrow_x[i]-11})
-      .attr('y', function(d, i) {return arrow_y[i]+1+100})
+      .attr('x', function(d, i) {return arrow_x[i]})
+      .attr('y', function(d, i) {return arrow_y[i]+117})
       .on("click", function(d, i){
         var sClass = '.slide'+i;
-        g.selectAll(sClass).filter('.quote,.arrow')
+        g.selectAll(sClass).filter('.quote, .arrow')
           .transition()
           .duration(0)
           .attr('pointer-events', 'none')
           .style('opacity', 0);
-        g.selectAll(sClass).filter('.desc,.fReadArrow')
+        g.selectAll(sClass).filter('.desc, .fReadArrow')
+        // g.selectAll(sClass).filter('.fReadArrow')
           .transition()
           .duration(200)
           .attr('pointer-events', 'all')
           .style('opacity', 1);})
       // .attr('width', 12)
       .attr('width', 140)
+      .attr('height', 140)
       .style('opacity', 0);
 
     g.append('g').selectAll('fReadArrows')
       .data(fRead)
       .enter()
-      .append('svg:image')
+      .append('text')
+      .text('FURTHER READING')
+      // .append('svg:image')
+      // .attr('xlink:href', '../images/Further-Reading2.svg')
       .attr('class', function(d, i) {return 'slide'+d+' fReadArrow fR'})
-      .attr('xlink:href', '../images/Further-Reading2.svg')
-      .attr('x', -4)
-      .attr('y', function(d, i) {return fRead_y[i]+1+100})
+      .attr('x', 1)
+      // .attr('y', function(d, i) {return fRead_y[i]+108})
+      .attr('y', 638)
       .on("click", function(d, i){
         var sClass = '.slide'+d;
         g.selectAll(sClass).filter('.desc,.fReadArrow')
@@ -212,19 +230,21 @@ var scrollVis = function () {
           .style('opacity', 1);})
       // .attr('width', 12)
       .attr('width', 140)
+      .attr('height', 140)
       .style('opacity', 0);
-
 
     // Custom slide edits
     g.selectAll('.slide0').filter('.eventYear').remove();
     g.selectAll('.slide0').filter('.desc').attr('transform', 'translate(0,-80)');
     g.selectAll('.slide2').filter('.eventYear').text('2000s');
+    g.selectAll('.slide4').filter('.desc').attr('height', 328);
     g.selectAll('.slide6').filter('.eventYear').text('Late 1800s');
     g.selectAll('.slide8').filter('.eventYear').text('Early 1800s');
     g.selectAll('.slide9').filter('.eventYear').text('1500-1800');
+    g.selectAll('.slide9,.slide15').filter('.fReadArrow').attr('y', 642);
     g.selectAll('.slide10').filter('.eventYear').text('1300-1850');
     g.selectAll('.slide0').filter('.arrow').remove()
-    g.selectAll('.slide16').filter('.eventYear').text('11000-9500 BC');
+    g.selectAll('.slide15').filter('.eventYear').text('11000-9500 BC');
     g.selectAll('.slide18').filter('.eventYear').text('130000-115000 BC');
     g.selectAll('.slide19').filter('.eventYear').text('3000000 BC');
 
@@ -266,7 +286,7 @@ var scrollVis = function () {
           .duration(600)
           .style('opacity', 0.4);
 
-        g.selectAll('.slide'+val).filter('.arrow,.quote')
+        g.selectAll('.slide'+val).filter('.arrow')
           .attr('pointer-events', 'all')
           .transition()
           .duration(600)
@@ -316,7 +336,7 @@ var scrollVis = function () {
   });
 }
 
-  chart.activate = function (index) {
+  panelGroup.activate = function (index) {
     activeIndex = index;
     var sign = (activeIndex - lastIndex) < 0 ? -1 : 1;
     var scrolledSections = d3.range(lastIndex + sign, activeIndex + sign, sign);
@@ -332,13 +352,13 @@ var scrollVis = function () {
    * @param index
    * @param progress
    */
-  chart.update = function (index, progress) {
+  panelGroup.update = function (index, progress) {
     updateFunctions[index](progress);
     // console.log(progress)
   };
 
   // return chart function
-  return chart;
+  return panelGroup;
 };
 
 
