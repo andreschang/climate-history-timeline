@@ -72,15 +72,15 @@ var scrollVis = function () {
     // arrow_x, arrow_y, and fRead_y are placement parameters.
     // arrows all need to be shifted manually when description lengths are changes (sorry!)
 
-    var img_slides = [1, 2, 3, 4, 6, 8, 10, 12, 13, 15, 18],
-      img_names = ['iceloss_crop', 'shuvinai', 'gisp2_crop', 'northpole2', 'church', 'woodmap',
+    var img_slides = [1, 2, 3, 4, 6, 7, 8, 10, 12, 13, 15, 18],
+      img_names = ['iceloss_crop', 'shuvinai', 'gisp2_crop', 'northpole2', 'church', 'frank', 'woodmap',
       'bruegel', 'hyperborea', 'mask2', 'lgm', 'dirtyice'],
-      lBox_names = ['iceloss2', 'shuvinai', 'gisp2_crop', 'northpole2', 'church', 'woodmap',
+      lBox_names = ['iceloss2', 'shuvinai', 'gisp2_crop', 'northpole2', 'church', 'frank', 'woodmap',
       'bruegel', 'hyperborea', 'mask2', 'lgm', 'dirtyice'],
-      img_dims = [[365, 564],[800,599],[331,574],[902,1200],[880,501],[286,553],[629,453],
+      img_dims = [[365, 564],[800,599],[331,574],[902,1200],[880,501],[750,1024],[286,553],[629,453],
       [720,668],[477,742],[1000,966],[850,1269]],
-      img_x = [325, 270, 400, 340, 228, 370, 240, 240, 380, 300, 350],
-      img_y = [100, 120, 100, 120, 126, 50, 30, 60, 43, 60, 40],
+      img_x = [325, 270, 400, 340, 228, 376, 370, 240, 240, 380, 300, 350],
+      img_y = [100, 120, 100, 120, 126, 50, 50, 30, 60, 43, 60, 40],
       arrow_x = [100, 2, 2, 96, 213, 2, 304, 156, 308, 300, 2, 343, 
       308, 345, 221, 250, 252, 2, 233, 319],
       arrow_y = [430, 307, 399, 307, 338, 338, 307, 338, 307, 338, 338, 307, 

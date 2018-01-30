@@ -32,6 +32,9 @@ var scale0 = d3.scaleLinear().domain([tf[0], tf[1]]).range([scaleDom[0],scaleDom
   scale3 = d3.scaleLinear().domain([tf[3], tf[4]]).range([scaleDom[3],scaleDom[4]]),
   scale4 = d3.scaleLinear().domain([tf[4], tf[5]]).range([scaleDom[4],scaleDom[5]]);
 
+var depth0 = [1, 1, 1, 1, -6.04, -10.83, -14.93, -19.19, -23.29, -27.03, -30.45, -33.90, 
+-36.85, -40.22, -43.49, -46.87, -49.77, -52.95, -55.64, -58.78, -61.85, -64.47, -67.37];
+
 var y2 = d3.scaleLinear()
   .domain([timeEnd, tf[5]])
   .range([0, miniHeight]);
@@ -120,6 +123,10 @@ mainTL.append("rect")
 // BUILD EACH Y-SCALE
 var axis0 = d3.axisLeft(scale0)
   .ticks(20, "f");
+var axis0d = d3.axisRight(scale0)
+  .ticks(20)
+  .tickSize(0)
+  .tickFormat(function(d, i) {var showDepth = depth0[i] <= 0 ? depth0[i]+' m' : ''; return showDepth});
 var axis1 = d3.axisLeft(scale1)
   .ticks(20, "f");
 var axis2 = d3.axisLeft(scale2)
@@ -189,6 +196,12 @@ d3.tsv("web_timeline.4.5.tsv", function(items) {
     .attr("transform", "translate(20,0)")
     .call(axis0)
     .select(".domain").remove();
+
+  // mainTL.append("g")
+  //   .attr("class", "axis")
+  //   .attr("transform", "translate(100,0)")
+  //   .call(axis0d)
+  //   .select(".domain").remove();
 
   mainTL.append("g")
     .attr("class", "axis")
