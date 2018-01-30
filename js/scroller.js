@@ -105,7 +105,7 @@ function scroller() {
       .attr("transform", "translate(0,"+boxMultiScale((yLoc+5))+")");
     d3.select("#miniYear")
       .text(function() {
-        var adj = yLoc <= 5460 ? 5 : 60;
+        var adj = yLoc <= 5460 ? 5 : 86;
         var year = yearMultiScale((yLoc+adj));
         console.log(year)
         console.log(yLoc)
