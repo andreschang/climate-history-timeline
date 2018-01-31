@@ -191,3 +191,10 @@
 .event0-1000000 {
   fill: url(#endGrad);
 }
+
+@media only screen and (max-width: 500px) {
+
+#vis .title {
+  font-family: Shift;
+  font-size:2em;
+}}
