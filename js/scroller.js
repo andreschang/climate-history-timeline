@@ -109,8 +109,8 @@ function scroller() {
         var year = yearMultiScale((yLoc+adj));
         console.log(year)
         console.log(yLoc)
-        var showYear = year >= 0 ? d3.format(".0f")(year) : -d3.format(".0f")(year)+' BC';
-        var showYear2 = year >= -1000000 ? showYear : '1000000+ BC';
+        var showYear = year >= 0 ? d3.format(".0f")(year) : d3.format(",.0f")(-year)+' BC';
+        var showYear2 = year >= -1000000 ? showYear : '1,000,000+ BC';
         var depth = (year <= 1988 && year >= -237000) ? dMultiScale((year)) : '1';
         var showDepth = depth <= 0 ? ' / '+d3.format(".0f")(depth)+' m' : '';
         return( showYear2+showDepth);

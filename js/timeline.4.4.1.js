@@ -303,7 +303,7 @@ d3.tsv("web_timeline.4.5.tsv", function(items) {
   miniLocator.append("text")
     .attr("id", "miniYear")
     // .attr("transform", "translate(-8,2)rotate(-90)");
-    .attr("transform", "translate(-8,6)rotate(-90)");
+    .attr("transform", "translate(-8,8)rotate(-90)");
 
   // d3.selectAll(".event0-1000000").filter(".miniEvent")
   //   .attr("height", (86.8246-16));

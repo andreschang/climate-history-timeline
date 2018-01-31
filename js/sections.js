@@ -244,6 +244,8 @@ var scrollVis = function () {
     g.selectAll('.slide9,.slide15').filter('.fReadArrow').attr('y', 642);
     g.selectAll('.slide10').filter('.eventYear').text('1300-1850');
     g.selectAll('.slide0').filter('.arrow').remove()
+    g.selectAll('.slide13').filter('.eventYear').text('3,000 BC');
+    g.selectAll('.slide14').filter('.eventYear').text('5,000 BC');
     g.selectAll('.slide15').filter('.eventYear').text('11,000-9,500 BC');
     g.selectAll('.slide16').filter('.eventYear').text('22,000 BC');
     g.selectAll('.slide17').filter('.eventYear').text('130,000-115,000 BC');
