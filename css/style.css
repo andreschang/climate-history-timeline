@@ -192,9 +192,9 @@
   fill: url(#endGrad);
 }
 
-@media only screen and (max-width: 500px) {
+/*@media only screen and (max-width: 500px) {
 
 #vis .title {
   font-family: Shift;
   font-size:1.2em;
-}}
+}}*/

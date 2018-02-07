@@ -1,15 +1,19 @@
-// Parameters
+// This code lays out the mainTimeline and miniTimeline
+// base graphics, and all scaling.
+
+// Timeline Parameters
 var lanes = ["Timeline"],
   laneLength = lanes.length,
   timeBegin = -1000000,
   timeEnd = 2020;
 
-var tf = [2020, 1800, 0, -22000, -100000],
-  t0 = [1801, 1, -21999, -99999, -999999],
+// Scale intervals
+var timeF = [2020, 1800, 0, -22000, -100000],
+  time0 = [1801, 1, -21999, -99999, -999999],
   units = [10, 100, 1000, 10000, 100000],
-  nUnits = tf.map(function(n, i) { return (tf[i]+1-t0[i]) / units[i]; });
+  nUnits = timeF.map(function(n, i) { return (timeF[i]+1-time0[i]) / units[i]; });
 
-tf.splice(5,0,-1000000)
+timeF.splice(5,0,-1000000)
 
 // Placement
 var mTop = 50,
@@ -20,60 +24,77 @@ var mTop = 50,
   miniWidth = 70 - 2*m,
   mainWidth = 220 - miniWidth;
 
-// Calculate ranges for shifting scale timeline
+// Calculate ranges for shifting-scale timeline
 nUnits.splice(0,0,0);
 var nDom = nUnits.map( function(n, i) { return nUnits.slice(0,i+1).reduce(getSum) ;}),
   totalDom = nUnits.reduce(getSum),
   scaleDom = nDom.map( function(n) { return n*mainHeight/totalDom});
 
-var scale0 = d3.scaleLinear().domain([tf[0], tf[1]]).range([scaleDom[0],scaleDom[1]]),
-  scale1 = d3.scaleLinear().domain([tf[1], tf[2]]).range([scaleDom[1],scaleDom[2]]),
-  scale2 = d3.scaleLinear().domain([tf[2], tf[3]]).range([scaleDom[2],scaleDom[3]]),
-  scale3 = d3.scaleLinear().domain([tf[3], tf[4]]).range([scaleDom[3],scaleDom[4]]),
-  scale4 = d3.scaleLinear().domain([tf[4], tf[5]]).range([scaleDom[4],scaleDom[5]]);
+var scale0 = d3.scaleLinear().domain([timeF[0], timeF[1]]).range([scaleDom[0],scaleDom[1]]),
+  scale1 = d3.scaleLinear().domain([timeF[1], timeF[2]]).range([scaleDom[1],scaleDom[2]]),
+  scale2 = d3.scaleLinear().domain([timeF[2], timeF[3]]).range([scaleDom[2],scaleDom[3]]),
+  scale3 = d3.scaleLinear().domain([timeF[3], timeF[4]]).range([scaleDom[3],scaleDom[4]]),
+  scale4 = d3.scaleLinear().domain([timeF[4], timeF[5]]).range([scaleDom[4],scaleDom[5]]);
 
-var y2 = d3.scaleLinear()
-  .domain([timeEnd, tf[5]])
-  .range([0, miniHeight]);
-var x1 = d3.scaleLinear()
+// Build each y-axis
+var axis0 = d3.axisLeft(scale0).ticks(20, "f"),
+  axis1 = d3.axisLeft(scale1).ticks(20, "f"),
+  axis2 = d3.axisLeft(scale2).ticks(20, "f")
+    .tickFormat(function(d) {var showYear0 = d >= 0 ? d3.format(".0f")(d) : d3.format(",.0f")(-d)+' BC';
+          return( showYear0 )}),
+  axis3 = d3.axisLeft(scale3).ticks(10)
+    .tickFormat(function(d) {var showYear0 = d >= 0 ? d3.format(".0f")(d) : d3.format(",.0f")(-d)+' BC';
+          return( showYear0 )}),
+  axis4 = d3.axisLeft(scale4).ticks(10)
+    .tickFormat(function(d) {var showYear0 = d >= 0 ? d3.format(".0f")(d) : d3.format(",.0f")(-d)+' BC';
+          return( showYear0 )});
+
+// horizontal scaling
+var xMain = d3.scaleLinear()
   .domain([0, laneLength])
   .range([0, mainWidth]);
-var x2 = d3.scaleLinear()
+var xMini = d3.scaleLinear()
   .domain([0, laneLength])
   .range([0, miniWidth]);
-var gispEnd = y2(-237000)
 
-function multiScale(inputNumber) {
-      if (tf[1] <= inputNumber && inputNumber <= tf[0]) {
+// vertical scaling
+var yMini = d3.scaleLinear()
+  .domain([timeEnd, timeF[5]])
+  .range([0, miniHeight]);
+var gispEnd = yMini(-237000)
+
+function mainScale(inputNumber) {
+      if (timeF[1] <= inputNumber && inputNumber <= timeF[0]) {
         return scale0(inputNumber);
-      } else if (tf[2] <= inputNumber && inputNumber < tf[1]) {
+      } else if (timeF[2] <= inputNumber && inputNumber < timeF[1]) {
         return scale1(inputNumber);
-      } else if (tf[3] <= inputNumber && inputNumber < tf[2]) {
+      } else if (timeF[3] <= inputNumber && inputNumber < timeF[2]) {
         return scale2(inputNumber);
-      } else if (tf[4] <= inputNumber && inputNumber < tf[3]) {
+      } else if (timeF[4] <= inputNumber && inputNumber < timeF[3]) {
         return scale3(inputNumber);
-      } else if (tf[5] <= inputNumber && inputNumber < tf[4]) {
+      } else if (timeF[5] <= inputNumber && inputNumber < timeF[4]) {
         return scale4(inputNumber);
       };
 };
 
-var bounds = tf.map(function(n) {return multiScale(n) ;} )
+var bounds = timeF.map(function(n) {return mainScale(n) ;} )
 
-function boxMultiScale(inputNumber) {
+// miniLocator vertical, year, and depth scaling
+function miniLocatorScale(inputNumber) {
       if (bounds[0] <= inputNumber && inputNumber <= bounds[1]) {
-        return y2(scale0.invert(inputNumber));
+        return yMini(scale0.invert(inputNumber));
       } else if (bounds[1] <= inputNumber && inputNumber < bounds[2]) {
-        return y2(scale1.invert(inputNumber));
+        return yMini(scale1.invert(inputNumber));
       } else if (bounds[2] <= inputNumber && inputNumber < bounds[3]) {
-        return y2(scale2.invert(inputNumber));
+        return yMini(scale2.invert(inputNumber));
       } else if (bounds[3] <= inputNumber && inputNumber < bounds[4]) {
-        return y2(scale3.invert(inputNumber));
+        return yMini(scale3.invert(inputNumber));
       } else if (inputNumber >= bounds[4]) {
-        return y2(scale4.invert(inputNumber));
+        return yMini(scale4.invert(inputNumber));
       };
 };
 
-function yearMultiScale(inputNumber) {
+function miniYearScale(inputNumber) {
       if (bounds[0] <= inputNumber && inputNumber <= bounds[1]) {
         return scale0.invert(inputNumber);
       } else if (bounds[1] <= inputNumber && inputNumber < bounds[2]) {
@@ -87,6 +108,7 @@ function yearMultiScale(inputNumber) {
       };
 };
 
+// Approximate linear relationships between year and depth
 var dScale0 = d3.scaleLinear().range([-6.00, -69.25]).domain([1988, 1800]),
   dScale1 = d3.scaleLinear().range([-76.93, -477.88]).domain([1800, 0]),
   dScale2 = d3.scaleLinear().range([-557, -1737]).domain([0, -9000]),
@@ -95,7 +117,7 @@ var dScale0 = d3.scaleLinear().range([-6.00, -69.25]).domain([1988, 1800]),
   dScale5 = d3.scaleLinear().range([-2426, -2768]).domain([-48000, -100000]),
   dScale6 = d3.scaleLinear().range([-2768, -3005]).domain([-48000, -237000]);
 
-function dMultiScale(inputNumber) {
+function depthScale(inputNumber) {
       if (1800 <= inputNumber && inputNumber <= 1988) {
         return dScale0(inputNumber);}
       else if (0 <= inputNumber && inputNumber < 1800) {
@@ -110,25 +132,9 @@ function dMultiScale(inputNumber) {
         return dScale5(inputNumber);}
       else if (-237000 <= inputNumber && inputNumber < -100000) {
         return dScale6(inputNumber);}
-      // } else if (bounds[1] <= inputNumber && inputNumber < bounds[2]) {
-      //   return scale1.invert(inputNumber);
-      // } else if (bounds[2] <= inputNumber && inputNumber < bounds[3]) {
-      //   return scale2.invert(inputNumber);
-      // } else if (bounds[3] <= inputNumber && inputNumber < bounds[4]) {
-      //   return scale3.invert(inputNumber);
-      // } else if (inputNumber >= bounds[4]) {
-      //   return scale4.invert(inputNumber);
-      // };
 };
 
-// }
-
-function getSum(total, num) {
-    return total + num;
-};
-
-// BUILD MAIN TL
-// main timeline
+// Build timeline frames
 var mainTL = d3.select("#sections")
   .append("svg")
   .attr("width", mainWidth+miniWidth+40)
@@ -139,50 +145,11 @@ var mainTL = d3.select("#sections")
   .attr("width", mainWidth);
 
 mainTL.append("rect")
-  .attr("x", .12*x1(1))
-  .attr("width", .75*x1(1))
-  .attr("height", mainHeight-(multiScale(-1000000)-multiScale(-600000)))
+  .attr("x", .12*xMain(1))
+  .attr("width", .75*xMain(1))
+  .attr("height", mainHeight-(mainScale(-1000000)-mainScale(-600000)))
   .attr("fill", "#edf1f2");
 
-// mainTL.append("rect")
-//   .attr("x", .1*x1(1))
-//   .attr("y", multiScale(1993))
-//   .attr("width", .02*x1(1))
-//   .attr("height", (multiScale(-273000)-multiScale(1993)))
-//   .attr("fill", "#f6a355");
-
-// BUILD EACH Y-SCALE
-var axis0 = d3.axisLeft(scale0)
-  .ticks(20, "f");
-var axis0d = d3.axisRight(scale0)
-  .ticks(20)
-  .tickSize(0)
-  .tickFormat(function(d, i) {var showDepth = depth0[i] <= 0 ? depth0[i]+' m' : ''; return showDepth});
-var axis1 = d3.axisLeft(scale1)
-  .ticks(20, "f");
-var axis2 = d3.axisLeft(scale2)
-  .ticks(20, "f")
-  .tickFormat(function(d) {var showYear0 = d >= 0 ? d3.format(".0f")(d) : d3.format(",.0f")(-d)+' BC';
-        return( showYear0 )});
-var axis3 = d3.axisLeft(scale3)
-  // .ticks(20, ".2s");
-  .ticks(10)
-  .tickFormat(function(d) {var showYear0 = d >= 0 ? d3.format(".0f")(d) : d3.format(",.0f")(-d)+' BC';
-        return( showYear0 )});
-var axis4 = d3.axisLeft(scale4)
-  // .ticks(20, ".2s");
-  .ticks(10)
-  .tickFormat(function(d) {var showYear0 = d >= 0 ? d3.format(".0f")(d) : d3.format(",.0f")(-d)+' BC';
-        return( showYear0 )});
-
-// minor ticks
-// var axis2m = d3.axisLeft(scale2)
-//   .ticks(2000, "f");
-// var axis1m = d3.axisLeft(scale1)
-//   .ticks(200, "f");
-
-// BUILD MINI TL
-// mini timeline
 var miniTL = d3.select("#miniTL")
   .append("svg")
   .attr("width", miniWidth+2*m)
@@ -193,89 +160,49 @@ var miniTL = d3.select("#miniTL")
   .attr("width", miniWidth);
 
 miniTL.append("rect")
-  .attr("x", 0.05*x2(1))
-  .attr("width", .75*x2(1))
+  .attr("x", 0.05*xMini(1))
+  .attr("width", .75*xMini(1))
   // height edited to match limit of miniBox slider
   // .attr("height", (miniHeight-16))
-  .attr("height", (miniHeight-(y2(-400000))))
+  .attr("height", (miniHeight-(yMini(-400000))))
   .attr("fill", "#edf1f2");
 
-// Load data and build timelines
-d3.tsv("web_timeline.4.5.tsv", function(items) {
+// Load data and fill timelines
+d3.tsv("web_timeline.4.8.tsv", function(items) {
 
-  // lines
-
-  // main events
   mainTL.append("g").selectAll("mainEvent")
     .data(items)
     .enter().append("rect")
     .attr("class", function(d) {return "event" + d.lane + " mainEvent" + " event" + d.lane + d.start + " step"})
     .attr("id", function(d) {return "mainEvent"+ d.lane + d.start})
-    .attr("y", function(d) {return multiScale(d.end, tf, t0, scaleDom);})
-    .attr("x", .12*x1(1))
-    .attr("width", .75*x1(1))
-    .attr("height", function(d) {return multiScale(d.start, tf, t0, scaleDom)-multiScale(d.end, tf, t0, scaleDom)});
+    .attr("y", function(d) {return mainScale(d.end, timeF, time0, scaleDom);})
+    .attr("x", .12*xMain(1))
+    .attr("width", .75*xMain(1))
+    .attr("height", function(d) {return mainScale(d.start, timeF, time0, scaleDom)-mainScale(d.end, timeF, time0, scaleDom)});
 
-  // Remove event marker for title slide
-  mainTL.selectAll('.mainEvent').filter('.event02018')
-    .classed('event0', false)
+  var yearAxis = mainTL.append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(20,0)");
+  yearAxis.append("g").call(axis0);
+  yearAxis.append("g").call(axis1);
+  yearAxis.append("g").call(axis2);
+  yearAxis.append("g").call(axis3);
+  yearAxis.append("g").call(axis4);
+  yearAxis.selectAll(".domain").remove();
+
+  // Remove mainEvent for title slide
+  mainTL.selectAll('.mainEvent').filter('.eventime02018')
+    .classed('eventime0', false)
     .attr('fill', 'none');
 
-  // append y-axes
-  mainTL.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(20,0)")
-    .call(axis0)
-    .select(".domain").remove();
-
-  mainTL.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(20,0)")
-    .call(axis1)
-    .select(".domain").remove();
-
-  mainTL.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(20,0)")
-    .call(axis2)
-    .select(".domain").remove();
-
-  mainTL.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(20,0)")
-    .call(axis3)
-    .select(".domain").remove();
-
-  mainTL.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(20,0)")
-    .call(axis4)
-    .select(".domain").remove();
-
-
-  // minor ticks
-  // mainTL.append("g")
-  //   .attr("class", "axis")
-  //   .attr("transform", "translate(20,0)")
-  //   .call(axis1m)
-  //   .selectAll("text, .domain").remove();
-
-  // mainTL.append("g")
-  //   .attr("class", "axis")
-  //   .attr("transform", "translate(20,0)")
-  //   .call(axis2m)
-  //   .selectAll("text, .domain").remove();
-
-  // //mini events
   miniTL.append("g").selectAll("miniEvent")
     .data(items)
     .enter().append("rect")
     .attr("class", function(d) {return "event" + d.lane + " miniEvent" + " event" + d.lane + d.start})
-    .attr("y", function(d) {return y2(d.end);})
-    // .attr("x", function(d) {return x2(d.lane)+0.1*x2(1);})
-    .attr("x", 0.05*x2(1))
-    .attr("width", .75*x2(1))
-    .attr("height", function(d) {return y2(d.start)-y2(d.end)});
+    .attr("y", function(d) {return yMini(d.end);})
+    .attr("x", 0.05*xMini(1))
+    .attr("width", .75*xMini(1))
+    .attr("height", function(d) {return yMini(d.start)-yMini(d.end)});
 
   // miniLocator with year ticker
   var miniLocator = miniTL.append("g")
@@ -285,32 +212,30 @@ d3.tsv("web_timeline.4.5.tsv", function(items) {
 
   miniLocator.append("rect")
     .attr("id", "miniBox")
-    .attr("width", .85*x2(1))
+    .attr("width", .85*xMini(1))
     .attr("height", 4)
     .attr("fill", "#F6A04D")
     .attr("opacity", .5)
     .attr();
 
   miniLocator.append("line")
-    .attr("x1", -4)
-    .attr("x2", 0)
+    .attr("xMain", -4)
+    .attr("xMini", 0)
     .attr("y1", 2)
-    .attr("y2", 2)
+    .attr("yMini", 2)
     .attr("stroke-width", 1)
     .attr("opacity", .5)
     .attr("stroke", "#F6A04D");
 
   miniLocator.append("text")
     .attr("id", "miniYear")
-    // .attr("transform", "translate(-8,2)rotate(-90)");
     .attr("transform", "translate(-8,8)rotate(-90)");
-
-  // d3.selectAll(".event0-1000000").filter(".miniEvent")
-  //   .attr("height", (86.8246-16));
-
  })
 
-  // Add interactivity 
+function getSum(total, num) {
+    return total + num;
+};
+
   function handleMouseOver(d, i) {
     if (d3.select(this).style("opacity") != 0) {
             d3.select(this)

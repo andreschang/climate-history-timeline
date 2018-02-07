@@ -23,17 +23,10 @@ var scrollVis = function () {
   var activateFunctions = [];
   var updateFunctions = [];
 
-  /**
-   * Sets up SVG group that panels
-   * will display in
-   */
-
   var panelGroup = function (selection) {
     selection.each(function (timelineData) {
-      // create svg and give it a width and height
       svg = d3.select(this).selectAll('svg').data([timelineData]);
       var svgE = svg.enter().append('svg');
-      // @v4 use merge to combine enter and existing selection
       svg = svg.merge(svgE);
 
       svg.attr('width', width + margin.left + margin.right);
@@ -41,14 +34,11 @@ var scrollVis = function () {
 
       svg.append('g');
 
-      // this group element will be used to contain all
-      // other elements.
       g = svg.select('g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
       setupVis(timelineData)
       setupSections();
-
     });
   };
 
@@ -59,49 +49,22 @@ var scrollVis = function () {
 
   var setupVis = function (timelineData) {
 
-    // Here is where all of the image data and custom placements are defined
-
-    // img_slides is the slide that each image shows up in (ex. the 5th image, 'church')
-    // shows up in slide 6
-
-    // img_names is filename (w/o .jpg extension) of image loaded in panel
-    // lBox_names is filename of image that loads in LightBox (usually the same as img_names)
-    // img_dims is the original image's dimensions in pixels [Width,Height]
-    // img_x and img_y are target placement of image in event panel
-    // fRead is the list of slides with "further reading" info loaded in
-    // arrow_x, arrow_y, and fRead_y are placement parameters.
-    // arrows all need to be shifted manually when description lengths are changes (sorry!)
-
-    var img_slides = [1, 2, 3, 4, 6, 7, 8, 10, 12, 13, 15, 18],
-      img_names = ['iceloss_crop', 'shuvinai', 'gisp2_crop', 'northpole2', 'church', 'frank', 'woodmap',
-      'bruegel', 'hyperborea', 'mask2', 'lgm', 'dirtyice'],
-      lBox_names = ['iceloss2', 'shuvinai', 'gisp2_crop', 'northpole2', 'church', 'frank', 'woodmap',
-      'bruegel', 'hyperborea', 'mask2', 'lgm', 'dirtyice'],
-      img_dims = [[365, 564],[800,599],[331,574],[902,1200],[880,501],[750,1024],[286,553],[629,453],
-      [720,668],[477,742],[1000,966],[850,1269]],
-      img_x = [325, 270, 400, 340, 228, 376, 370, 240, 240, 380, 300, 350],
-      img_y = [100, 120, 100, 120, 126, 50, 50, 30, 60, 43, 60, 40],
-      arrow_x = [100, 2, 2, 96, 213, 2, 304, 156, 308, 300, 2, 343, 
-      308, 345, 221, 250, 252, 2, 233, 319],
-      arrow_y = [430, 307, 399, 307, 338, 338, 307, 338, 307, 338, 338, 307, 
-      368, 338, 338, 338, 338, 307, 368, 399],
-      fRead = [1,5,9,14,15,19];
-      // fRead_y = [510, 530, 530, 400, 510, 488];
-
     g.append('g').selectAll('img')
-      .data(img_slides)
+      .data(timelineData.filter(function(d) {return d.imgFile != ''}))
       .enter()
       .append('svg:a')
-        .attr('xlink:href', function(d,i) {return 'images/'+lBox_names[i]+'.jpg'})
-        .attr('data-lightbox', function(d,i) {return 'image #'+i})
-        .attr('data-title', function(d,i) {return timelineData[d].imgName+'<br>'+timelineData[d].imgSource})
+        .attr('xlink:href', function(d) {
+          var file = d.lightBoxFile != '' ? d.lightBoxFile : d.imgFile;
+          return 'images/'+file+'.jpg'})
+        .attr('data-lightbox', function(d) {return 'image #'+d.slide})
+        .attr('data-title', function(d) {return d.imgName+'<br>'+d.imgSource})
       .append('svg:image')
-      .attr('class', function(d, i) {return 'slide'+img_slides[i]+' img'})
-      .attr('xlink:href', function(d,i) {return 'images/'+img_names[i]+'.jpg'})
-      .attr('x', function(d,i) {return img_x[i]})
-      .attr('y', function(d,i) {return img_y[i]+100})
-      .attr('width', function(d,i) {return (width-img_x[i])})
-      .attr('height', function(d,i) {return ((width-img_x[i])*img_dims[i][1]/img_dims[i][0])})
+      .attr('class', function(d, i) {return 'slide'+d.slide+' img'})
+      .attr('xlink:href', function(d,i) {return 'images/'+d.imgFile+'.jpg'})
+      .attr('x', function(d,i) {return d.imgX})
+      .attr('y', function(d,i) {return (d.imgY)})
+      .attr('width', function(d, i) {return (width-d.imgX)})
+      .attr('height', function(d, i) { return ((width-(d.imgX))*d.fileHeight/d.fileWidth)})
       .on("mouseover", handleMouseOver)
       .on("mouseout", handleMouseOut)
       .style('opacity', 0);
@@ -112,7 +75,6 @@ var scrollVis = function () {
       .append('text')
       .attr('class', function(d, i) {return 'slide'+i+' eventDepth'})
       .attr('y', (height / 31)+100)
-      // .attr('y', (height / 10.8))
       .attr('x', 6)
       .text(function(d) {
         var depth = d.depthm <= 0.0 ? d.depthm+' meters / '+d.depthmi+' miles' : '';
@@ -125,7 +87,6 @@ var scrollVis = function () {
       .append('text')
       .attr('class', function(d, i) {return 'slide'+i+' eventYear'})
       .attr('y', (height / 10.8)+100)
-      // .attr('y', (height / 24))
       .attr('x', 6)
       .text(function(d) { var showYear = d.start >= 0 ? d.start : -d.start+' BC';
         return( showYear );})
@@ -138,7 +99,7 @@ var scrollVis = function () {
       .attr('class', function(d, i) {return 'slide'+i+' title'})
       .attr('y',  (height / 5)+100)
       .attr('x', width / 3)
-      .text(function(d) {return d.id})
+      .text(function(d) {return d.title})
       .call(wrap, 400)
       .style('opacity', 0);
 
@@ -183,42 +144,44 @@ var scrollVis = function () {
       .enter()
       .append('text')
       .text('READ MORE')
-      // .append('svg:image')
-      // .attr('xlink:href', '../images/Read-More5.svg')
       .attr('class', function(d, i) {return 'slide'+i+' arrow'})
-      .attr('x', function(d, i) {return arrow_x[i]})
-      .attr('y', function(d, i) {return arrow_y[i]+117})
+      .attr('x', function(d,i) {var qEnd = d3.select('#qEnd'+d.slide);
+        var arrowX0 = qEnd.node().getBoundingClientRect().right-340;
+        var arrowX = arrowX0 <= 370 ? arrowX0 : 1;
+        console.log(arrowX);
+        return arrowX})
+      .attr('y', function(d,i) {var qEnd = d3.select('#qEnd'+d.slide);
+        var arrowX0 = qEnd.node().getBoundingClientRect().right-340;
+        var arrowY0 = qEnd.node().getBoundingClientRect().bottom-8;
+        var arrowY = arrowX0 <= 370 ? arrowY0 : arrowY0+33;
+        console.log(arrowY);
+        return arrowY})
       .on("click", function(d, i){
-        var sClass = '.slide'+i;
+        var sClass = '.slide'+d.slide;
         g.selectAll(sClass).filter('.quote, .arrow')
           .transition()
           .duration(0)
           .attr('pointer-events', 'none')
           .style('opacity', 0);
         g.selectAll(sClass).filter('.desc, .fReadArrow')
-        // g.selectAll(sClass).filter('.fReadArrow')
           .transition()
           .duration(200)
           .attr('pointer-events', 'all')
           .style('opacity', 1);})
-      // .attr('width', 12)
       .attr('width', 140)
       .attr('height', 140)
       .style('opacity', 0);
 
     g.append('g').selectAll('fReadArrows')
-      .data(fRead)
+      .data(timelineData.filter(function(d) {return d.furtherReading != '' }))
       .enter()
       .append('text')
       .text('FURTHER READING')
-      // .append('svg:image')
-      // .attr('xlink:href', '../images/Further-Reading2.svg')
-      .attr('class', function(d, i) {return 'slide'+d+' fReadArrow fR'})
+      .attr('class', function(d) {return 'slide'+d.slide+' fReadArrow fR'})
       .attr('x', 1)
-      // .attr('y', function(d, i) {return fRead_y[i]+108})
       .attr('y', 638)
-      .on("click", function(d, i){
-        var sClass = '.slide'+d;
+      .on("click", function(d){
+        var sClass = '.slide'+d.slide;
         g.selectAll(sClass).filter('.desc,.fReadArrow')
           .transition()
           .duration(0)
@@ -228,13 +191,12 @@ var scrollVis = function () {
           .transition()
           .duration(200)
           .style('opacity', 1);})
-      // .attr('width', 12)
       .attr('width', 140)
       .attr('height', 140)
       .style('opacity', 0);
 
     // Custom slide edits
-    g.selectAll('.slide0').filter('.eventYear').remove();
+    g.selectAll('.slide0').filter('.eventYear,.arrow').remove();
     g.selectAll('.slide0').filter('.desc').attr('transform', 'translate(0,-80)');
     g.selectAll('.slide2').filter('.eventYear').text('2000s');
     g.selectAll('.slide4').filter('.desc').attr('height', 328);
@@ -402,5 +364,5 @@ function display(data) {
 }
 
 // load data and display
-d3.tsv('web_timeline.4.5.tsv', display);
+d3.tsv('web_timeline.4.8.tsv', display);
 
