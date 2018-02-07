@@ -65,8 +65,8 @@ var scrollVis = function () {
       .attr('y', function(d,i) {return (d.imgY)})
       .attr('width', function(d, i) {return (width-d.imgX)})
       .attr('height', function(d, i) { return ((width-(d.imgX))*d.fileHeight/d.fileWidth)})
-      .on("mouseover", handleMouseOver)
-      .on("mouseout", handleMouseOut)
+      .on("mouseover", imageMouseOver)
+      .on("mouseout", imageMouseOut)
       .style('opacity', 0);
 
     g.append('g').selectAll('eventDepth')
@@ -153,7 +153,7 @@ var scrollVis = function () {
       .attr('y', function(d,i) {var qEnd = d3.select('#qEnd'+d.slide);
         var arrowX0 = qEnd.node().getBoundingClientRect().right-340;
         var arrowY0 = qEnd.node().getBoundingClientRect().bottom-8;
-        var arrowY = arrowX0 <= 370 ? arrowY0 : arrowY0+33;
+        var arrowY = arrowX0 <= 370 ? arrowY0 : arrowY0+36;
         console.log(arrowY);
         return arrowY})
       .on("click", function(d, i){
@@ -168,6 +168,8 @@ var scrollVis = function () {
           .duration(200)
           .attr('pointer-events', 'all')
           .style('opacity', 1);})
+      .on("mouseover", linkMouseOver)
+      .on("mouseout", linkMouseOut)
       .attr('width', 140)
       .attr('height', 140)
       .style('opacity', 0);
@@ -191,6 +193,8 @@ var scrollVis = function () {
           .transition()
           .duration(200)
           .style('opacity', 1);})
+      .on("mouseover", linkMouseOver)
+      .on("mouseout", linkMouseOut)
       .attr('width', 140)
       .attr('height', 140)
       .style('opacity', 0);
@@ -256,7 +260,12 @@ var scrollVis = function () {
           .attr('pointer-events', 'all')
           .transition()
           .duration(600)
-          .style('opacity', 1.0);}
+          .style('opacity', 0.7);
+
+        g.selectAll('.slide'+val).filter('.arrow')
+          .transition()
+          .duration(600)
+          .style('opacity', 0.7);}
 
       };
 

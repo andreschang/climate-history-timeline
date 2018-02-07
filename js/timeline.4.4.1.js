@@ -236,7 +236,7 @@ function getSum(total, num) {
     return total + num;
 };
 
-  function handleMouseOver(d, i) {
+  function imageMouseOver(d, i) {
     if (d3.select(this).style("opacity") != 0) {
             d3.select(this)
               .transition()        
@@ -244,10 +244,26 @@ function getSum(total, num) {
               .style("opacity", 1);}
   };
 
-  function handleMouseOut(d, i) {
+  function imageMouseOut(d, i) {
     if (d3.select(this).style("opacity") > 0.4) {
             d3.select(this)
               .transition()        
               .duration(200)      
               .style("opacity", .4);}
+  };
+
+  function linkMouseOver(d, i) {
+    if (d3.select(this).style("opacity") != 0) {
+            d3.select(this)
+              .transition()        
+              .duration(200)      
+              .style("opacity", 1);}
+  };
+
+  function linkMouseOut(d, i) {
+    if (d3.select(this).style("opacity") > 0.8) {
+            d3.select(this)
+              .transition()        
+              .duration(200)      
+              .style("opacity", .7);}
   };
