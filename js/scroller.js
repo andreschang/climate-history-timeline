@@ -4,7 +4,6 @@
  * of figuring out which section
  * the user is currently scrolled
  * to.
- *
  */
 function scroller() {
   var container = d3.select('body');
@@ -16,12 +15,8 @@ function scroller() {
   // be scrolled through
   var sections = null;
 
-  // array that will hold the
-  // y coordinate of each section
-  // that is scrolled through
   var sectionPositions = [];
   var currentIndex = -1;
-  // y coordinate of
   var containerStart = 0;
 
   /**
@@ -47,14 +42,6 @@ function scroller() {
     // initially to setup
     // scroller.
     resize();
-
-    // hack to get position
-    // to be called once for
-    // the scroll position on
-    // load.
-    // @v4 timer no longer stops if you
-    // return true at the end of the callback
-    // function - so here we stop it explicitly.
     var timer = d3.timer(function () {
       position();
       timer.stop();
@@ -96,23 +83,17 @@ function scroller() {
     var yLoc = (pos > 0) ? pos : 0;
     var sectionIndex = d3.bisect(sectionPositions, pos);
     sectionIndex = Math.min(sections.size(), sectionIndex);
-    // console.log(containerStart);
-    // console.log(sectionPositions);
-    // console.log(pos);
-    // console.log(sectionIndex);
 
     d3.select("#miniLocator")
-      .attr("transform", "translate(0,"+boxMultiScale((yLoc+5))+")");
+      .attr("transform", "translate(0,"+miniLocatorScale((yLoc+5))+")");
     d3.select("#miniYear")
       .text(function() {
-        var adj = yLoc <= 5460 ? 5 : 86;
-        var year = yearMultiScale((yLoc+adj));
-        console.log(year)
-        console.log(yLoc)
-        var showYear = year >= 0 ? d3.format(".0f")(year) : d3.format(",.0f")(-year)+' BC';
-        var showYear2 = year >= -1000000 ? showYear : '1,000,000+ BC';
-        var depth = (year <= 1988 && year >= -237000) ? dMultiScale((year)) : '1';
-        var showDepth = depth <= 0 ? ' / '+d3.format(".0f")(depth)+' m' : '';
+        var adj = yLoc <= 5460 ? 5 : 86,
+          year = miniYearScale((yLoc+adj)),
+          showYear = year >= 0 ? d3.format(".0f")(year) : d3.format(",.0f")(-year)+' BC',
+          showYear2 = year >= -1000000 ? showYear : '1,000,000+ BC',
+          depth = (year <= 1988 && year >= -237000) ? depthScale((year)) : '1',
+          showDepth = depth <= 0 ? ' / '+d3.format(".0f")(depth)+' m' : '';
         return( showYear2+showDepth);
       });
 
