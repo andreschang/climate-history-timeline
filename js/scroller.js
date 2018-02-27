@@ -88,6 +88,8 @@ function scroller() {
       .attr("transform", "translate(0,"+miniLocatorScale((yLoc+5))+")");
     d3.select("#miniYear")
       .text(function() {
+        // adj is a hack solution to widening gap in time
+        // between year shown in MiniLoc and year shown in mainTL
         var adj = yLoc <= 5460 ? 5 : 86,
           year = miniYearScale((yLoc+adj)),
           showYear = year >= 0 ? d3.format(".0f")(year) : d3.format(",.0f")(-year)+' BC',
