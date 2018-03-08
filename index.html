@@ -2,10 +2,11 @@
 <html>
 <head>
   <meta content="utf-8" http-equiv="encoding">
+  <meta name="viewport" content="width=device-width">
   <title>Arctic Timeline</title>
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
   <link rel="stylesheet" type="text/css" href="css/lightbox.css"/>
-  <svg height="10" width="10" xmlns="http://www.w3.org/2000/svg" version="1.1"> <defs> 
+  <svg height="10" width="10" xmlns="http://www.w3.org/2000/svg" version="1.1"> <defs>
     <linearGradient id="endGrad" x1="0%" y1="0%" x2="0%" y2="85%">
       <stop offset="0%" style="stop-color:rgb(113,159,163);stop-opacity:1" />
       <stop offset="100%" style="stop-color:rgb(113,159,163);stop-opacity:0" />
@@ -13,9 +14,24 @@
      </defs> </svg>
 </head>
 <body>
-<div class="container">
+  <div class="contain-wrap">
+<div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+
+<div class="container displaynone">
   <div id = 'header'>
-    <a href = "http://inhumantime.org/"><img src="images/inhumantime_logo.jpg" alt="In Human Time logo" style="height:76px; padding-left: 20px"></a>
+    <a href = "http://inhumantime.org/"><img src="images/inhumantime_logo.png" class="logo" alt="In Human Time logo"></a>
+  <div class="menuwrap"><div class="menu">
+  <span class="menu-circle"></span>
+  <a href="#" class="menu-link">
+    <span class="menu-icon">
+      <span class="menu-line menu-line-1"></span>
+      <span class="menu-line menu-line-2"></span>
+      <span class="menu-line menu-line-3"></span>
+    </span>
+  </a>
+</div></div>
     <div id="navBar">
       <a class = "navItem" href = "http://inhumantime.org/" class = "navItem">HOME</a>
       <a class = "navItem" href = "http://inhumantime.org/exhibition/" class = "navItem">EXHIBITION</a>
@@ -24,7 +40,23 @@
       <a class = "navItem" href = "http://inhumantime.org/visit/" class = "navItem">VISIT</a>
       <a class = "navItem" href = "http://inhumantimeline.org/" class = "navItem">LEARN</a>
     </div>
+
+
+
+<div class="menu-overlay">
+    <div class="navItemWrap">
+       <a class = "navItem" href = "http://inhumantime.org/" class = "navItem">HOME</a>
+      <a class = "navItem" href = "http://inhumantime.org/exhibition/" class = "navItem">EXHIBITION</a>
+      <a class = "navItem" href = "http://inhumantime.org/artists/" class = "navItem">ARTISTS</a>
+      <a class = "navItem" href = "http://inhumantime.org/events/" class = "navItem">EVENTS</a>
+      <a class = "navItem" href = "http://inhumantime.org/visit/" class = "navItem">VISIT</a>
+      <a class = "navItem" href = "http://inhumantimeline.org/" class = "navItem">LEARN</a>
+    </div>
+</div>
+
   </div>
+
+
   <div id='graphic'>
     <div id='miniTL'>
     </div>
@@ -40,8 +72,9 @@
     <a href= "http://climatemuseum.org/">THE CLIMATE MUSEUM</a>
   </div> -->
 </div>
-
+</div>
 <script type="application/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="application/javascript" src="js/lightbox-plus-jquery.js"></script>
 <script type="application/javascript" src="js/timeline.4.4.1.js"></script>
 <script type="application/javascript" src="js/scroller.js"></script>

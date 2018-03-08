@@ -1,0 +1,16 @@
+
+
+
+@media(max-width:480px)  {
+  /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+    foreignObject {
+    font-size: 3em !important;
+    overflow: inherit;
+  }
+
+    #vis svg{
+      overflow: initial;
+    }
+
+}
+

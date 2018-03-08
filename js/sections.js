@@ -1,3 +1,29 @@
+$(window).on('load', function() { // makes sure the whole site is loaded
+  $('#status').delay(1000).fadeOut(); // will first fade out the loading animation
+  $('#preloader').delay(1500).fadeOut('slow'); // will fade out the white DIV that covers the website.
+  $('body')
+  .delay(1500)
+  .queue(function (next) {
+    $(this).css('overflow', 'visible');
+    next();
+  });
+
+  $('.contain-wrap')
+  .delay(1500)
+  .queue(function (next) {
+    $(this).css('overflow', 'visible');
+    next();
+  });
+
+    $('.container')
+  .delay(1500)
+  .queue(function (next) {
+    $(this).css('display', 'block');
+    next();
+  });
+
+
+
 
 /**
  * scrollVis - encapsulates
@@ -6,11 +32,16 @@
  * http://bost.ocks.org/mike/chart/
  */
 
+
+
 var scrollVis = function () {
   // constants to define the size
   // and margins of the vis area.
   var width = 560;
   var height = 520;
+  var mobile = $(window).width();
+  var newHeight = $(window).height();
+  var docWindow = 480;
   var top_height = 704;
   var margin = { top: 0, left: 10, bottom: 40, right: 10 };
 
@@ -39,6 +70,15 @@ var scrollVis = function () {
 
       setupVis(timelineData)
       setupSections();
+
+      var mobile = $(window).width();
+      console.log(mobile);
+      if(mobile < docWindow) {
+        svg.attr('id', 'test')
+
+      } else {
+
+      }
     });
   };
 
@@ -46,9 +86,21 @@ var scrollVis = function () {
    * setupVis - creates initial elements for all
    * sections of the visualization.
    */
+$(function() {
+
+  $(".menu-link").click(function(e) {
+    e.preventDefault();
+
+    $(".menu-overlay").toggleClass("open");
+    $(".menu").toggleClass("open");
+
+  });
+
+
+});
 
   var setupVis = function (timelineData) {
-
+    if(mobile > docWindow){
     g.append('g').selectAll('img')
       .data(timelineData.filter(function(d) {return d.imgFile != ''}))
       .enter()
@@ -68,7 +120,32 @@ var scrollVis = function () {
       .on("mouseover", imageMouseOver)
       .on("mouseout", imageMouseOut)
       .style('opacity', 0);
+      } else {
 
+     g.append('g').selectAll('img')
+      .data(timelineData.filter(function(d) {return d.imgFile != ''}))
+      .enter()
+      .append('svg:a')
+        .attr('xlink:href', function(d) {
+          var file = d.lightBoxFile != '' ? d.lightBoxFile : d.imgFile;
+          return 'images/'+file+'.jpg'})
+        .attr('data-lightbox', function(d) {return 'image #'+d.slide})
+        .attr('data-title', function(d) {return d.imgName+'<br>'+d.imgSource})
+      .append('svg:image')
+      .attr('class', function(d, i) {return 'slide'+d.slide+' img'})
+      .attr('xlink:href', function(d,i) {return 'images/'+d.imgFile+'.jpg'})
+      .attr('x', 50)
+      .attr('y', newHeight)
+      .attr('width', function(d, i) {return (width-d.imgX)})
+      .attr('height', function(d, i) { return ((width-(d.imgX))*d.fileHeight/d.fileWidth)})
+      .on("mouseover", imageMouseOver)
+      .on("mouseout", imageMouseOut)
+      .style('opacity', 0);
+
+
+      }
+
+    if(mobile > docWindow) {
     g.append('g').selectAll('eventDepth')
       .data(timelineData)
       .enter()
@@ -102,6 +179,45 @@ var scrollVis = function () {
       .text(function(d) {return d.title})
       .call(wrap, 400)
       .style('opacity', 0);
+      } else {
+
+       g.append('g').selectAll('title')
+      .data(timelineData)
+      .enter()
+      .append('text')
+      .attr('class', function(d, i) {return 'slide'+i+' title'})
+      .attr('y',  (height / 5)+200)
+      .attr('x', width / 3)
+      .text(function(d) {return d.title})
+      .call(wrap, 400)
+      .style('opacity', 0);
+
+
+          g.append('g').selectAll('eventDepth')
+      .data(timelineData)
+      .enter()
+      .append('text')
+      .attr('class', function(d, i) {return 'slide'+i+' eventDepth'})
+      .attr('y', (height / 31)+ 170)
+      .attr('x', 0)
+      .text(function(d) {
+        var depth = d.depthm <= 0.0 ? d.depthm+' meters / '+d.depthmi+' miles' : '';
+        return depth})
+      .style('opacity', 0);
+
+    g.append('g').selectAll('eventYear')
+      .data(timelineData)
+      .enter()
+      .append('text')
+      .attr('class', function(d, i) {return 'slide'+i+' eventYear'})
+      .attr('y', (height / 10.8)+190)
+      .attr('x', 0)
+      .text(function(d) { var showYear = d.start >= 0 ? d.start : -d.start+' BC';
+        return( showYear );})
+      .style('opacity', 0);
+      }
+
+
 
     g.append('g').selectAll('fRead')
       .data(timelineData)
@@ -115,7 +231,10 @@ var scrollVis = function () {
       .append('xhtml:div')
         .html(function(d) {return "<h1>Further Reading</h1>"+d.furtherReading});
 
-    g.append('g').selectAll('desc')
+
+
+    if(mobile > docWindow) {
+      g.append('g').selectAll('desc')
       .data(timelineData)
       .enter()
       .append('foreignObject')
@@ -127,7 +246,7 @@ var scrollVis = function () {
       .append('xhtml:div')
         .html(function(d) {return d.desc});
 
-    g.append('g').selectAll('quote')
+        g.append('g').selectAll('quote')
       .data(timelineData)
       .enter()
       .append('foreignObject')
@@ -139,11 +258,40 @@ var scrollVis = function () {
       .append('xhtml:div')
         .html(function(d) {return '<p>'+d.quote+"</p>"});
 
+
+    } else {
+
+      g.append('g').selectAll('desc')
+      .data(timelineData)
+      .enter()
+      .append('foreignObject')
+        .attr('y', (height / 2.42)+100)
+        .attr('class', function(d, i) {return 'slide'+i+' desc'})
+        .style('opacity', 0)
+      .append('xhtml:div')
+        .html(function(d) {return d.desc});
+
+
+              g.append('g').selectAll('quote')
+      .data(timelineData)
+      .enter()
+      .append('foreignObject')
+        .attr('y', (height / 2.42)+230)
+        .attr("width", 510)
+        .attr("height", 300)
+        .attr('class', function(d, i) {return 'slide'+i+' quote'})
+        .style('opacity', 0)
+      .append('xhtml:div')
+        .html(function(d) {return '<p>'+d.quote+"</p>"});
+    }
+
+
     g.append('g').selectAll('arrows')
       .data(timelineData)
       .enter()
       .append('text')
       .text('READ MORE')
+      .attr("id", "remove")
       .attr('class', function(d, i) {return 'slide'+i+' arrow'})
       .attr('x', function(d,i) {var qEnd = d3.select('#qEnd'+d.slide);
         var arrowX0 = qEnd.node().getBoundingClientRect().right-340;
@@ -198,6 +346,7 @@ var scrollVis = function () {
       .attr('width', 140)
       .attr('height', 140)
       .style('opacity', 0);
+
 
     // Custom slide edits
     g.selectAll('.slide0').filter('.eventYear,.arrow').remove();
@@ -268,7 +417,6 @@ var scrollVis = function () {
           .style('opacity', 0.7);}
 
       };
-
     function getUp(val) {
       return function(progress) {
           var xb = val-1,
@@ -297,7 +445,7 @@ var scrollVis = function () {
         y = text.attr("y"),
         // dy = parseFloat(text.attr("dy")),
         dy = 0,
-        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+        tspan = text.text(null).append("tspan").attr('id', 'headings').attr("x", 0).attr("y", y).attr("dy", dy + "em");
     while (word = words.pop()) {
       line.push(word);
       tspan.text(line.join(" "));
@@ -305,7 +453,7 @@ var scrollVis = function () {
         line.pop();
         tspan.text(line.join(" "));
         line = [word];
-        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+        tspan = text.append("tspan").attr('id', 'headings').attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
       }
     }
   });
@@ -361,7 +509,7 @@ function display(data) {
   scroll.on('active', function (index) {
     // highlight current step text
     d3.selectAll('.step')
-      .style('opacity', function (d, i) { return i === index ? 1 : 0.1; });
+      .style('opacity', function (d, i) { return i === index ? 1 : 0.4; });
 
     // activate current section
     plot.activate(index);
@@ -375,3 +523,6 @@ function display(data) {
 // load data and display
 d3.tsv('web_timeline.4.8.tsv', display);
 
+
+
+});

@@ -141,8 +141,7 @@ var mainTL = d3.select("#sections")
   .attr("height", mainHeight+mTop+m)
   .append("g")
   .attr("transform", "translate(" + (miniWidth+mLeft+m+40) + "," + mTop + ")") // position mainTL
-  .attr("height", mainHeight)
-  .attr("width", mainWidth);
+
 
 mainTL.append("rect")
   .attr("x", .12*xMain(1))
@@ -229,7 +228,7 @@ d3.tsv("web_timeline.4.8.tsv", function(items) {
 
   miniLocator.append("text")
     .attr("id", "miniYear")
-    .attr("transform", "translate(-8,8)rotate(-90)");
+    .attr("transform", "translate(-8,20)rotate(-90)");
  })
 
 function getSum(total, num) {
@@ -239,31 +238,31 @@ function getSum(total, num) {
   function imageMouseOver(d, i) {
     if (d3.select(this).style("opacity") != 0) {
             d3.select(this)
-              .transition()        
-              .duration(200)      
+              .transition()
+              .duration(200)
               .style("opacity", 1);}
   };
 
   function imageMouseOut(d, i) {
     if (d3.select(this).style("opacity") > 0.4) {
             d3.select(this)
-              .transition()        
-              .duration(200)      
+              .transition()
+              .duration(200)
               .style("opacity", .4);}
   };
 
   function linkMouseOver(d, i) {
     if (d3.select(this).style("opacity") != 0) {
             d3.select(this)
-              .transition()        
-              .duration(200)      
+              .transition()
+              .duration(200)
               .style("opacity", 1);}
   };
 
   function linkMouseOut(d, i) {
     if (d3.select(this).style("opacity") > 0.8) {
             d3.select(this)
-              .transition()        
-              .duration(200)      
+              .transition()
+              .duration(200)
               .style("opacity", .7);}
   };
