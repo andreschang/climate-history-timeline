@@ -294,7 +294,7 @@
 }
 
   body {
-    overflow-x: hidden;
+    overflow: hidden;
     padding-bottom: 800px;
     width: 100vw !important;
   }

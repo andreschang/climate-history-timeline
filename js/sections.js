@@ -1,10 +1,6 @@
 $(window).on('load', function() { // makes sure the whole site is loaded
   $('#status').delay(500).fadeOut(); // will first fade out the loading animation
   $('#preloader').delay(1000).fadeOut('slow'); // will fade out the white DIV that covers the website.
-  $('body').delay(750).css({'overflow':'visible'});
-})
-
-$(document).ready(function(){
 
 /**
  * scrollVis - encapsulates
@@ -504,12 +500,6 @@ function display(data) {
 d3.tsv('web_timeline.4.8.tsv', display);
 
 });
-
-// var is_chrome = !!window.chrome && !is_opera;
-// var is_explorer= typeof document !== 'undefined' && !!document.documentMode && !isEdge;
-// var is_firefox = typeof window.InstallTrigger !== 'undefined';
-// var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-// var is_opera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
 // if (is_safari) alert('It looks like you are using Safari! Please allow this page a few seconds to fully load before scrolling.');
 

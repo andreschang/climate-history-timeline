@@ -70,8 +70,20 @@ function scroller() {
     });
     // sectionPositions = sectionPositions.map( function(n) {return n});
     containerStart = container.node().getBoundingClientRect().top + window.pageYOffset;
-    $('.contain-wrap').delay(1000).css('overflow', 'visible');
-    $('#click-to-enter').delay(1000).css('display', 'none');
+
+    var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    if (is_safari == true) {
+        setTimeout( function() {
+        $('.contain-wrap').css('overflow', 'visible');
+        $('#click-to-enter').css('display', 'none');
+        $('body').css({'overflow':'visible'});
+      }, 2000)
+    } else {
+        $('.contain-wrap').css('overflow', 'visible');
+        $('#click-to-enter').css('display', 'none');
+        $('body').css({'overflow':'visible'});
+    }
   }
 
   /**
