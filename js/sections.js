@@ -57,18 +57,6 @@ var scrollVis = function () {
    * setupVis - creates initial elements for all
    * sections of the visualization.
    */
-$(function() {
-
-  $(".menu-link").click(function(e) {
-    e.preventDefault();
-
-    $(".menu-overlay").toggleClass("open");
-    $(".menu").toggleClass("open");
-
-  });
-
-
-});
 
   var setupVis = function (timelineData) {
     if(mobile > docWindow){
@@ -329,7 +317,9 @@ $(function() {
     g.selectAll('.slide10').filter('.eventYear').text('1300-1850');
     g.selectAll('.slide0').filter('.arrow').remove()
     g.selectAll('.slide13').filter('.eventYear').text('3,000 BC');
+    g.selectAll('.slide13').filter('.fReadArrow').remove();
     g.selectAll('.slide14').filter('.eventYear').text('5,000 BC');
+    g.selectAll('.slide14').filter('.fReadArrow').attr('y', 538);
     g.selectAll('.slide15').filter('.eventYear').text('11,000-9,500 BC');
     g.selectAll('.slide16').filter('.eventYear').text('22,000 BC');
     g.selectAll('.slide17').filter('.eventYear').text('130,000-115,000 BC');
@@ -337,7 +327,7 @@ $(function() {
     g.selectAll('.slide19').filter('.eventYear').text('1,000,000+ BC');
 
     if (mobile > docWindow) {
-      g.selectAll('.slide0').filter('.quote').attr('transform', 'translate(0,-40)');
+      g.selectAll('.slide0').filter('.quote').attr('transform', 'translate(0,-55)');
     } else {
       g.selectAll('.slide0').filter('.quote').attr('transform', 'translate(0,-80)');
     }
@@ -376,20 +366,23 @@ $(function() {
 
         g.selectAll('.slide'+val).filter('.img')
           .attr('pointer-events', 'all')
+          .attr('cursor', 'pointer')
           .transition()
           .duration(600)
           .style('opacity', 0.4);
 
         g.selectAll('.slide'+val).filter('.arrow')
           .attr('pointer-events', 'all')
+          .attr('cursor', 'pointer')
           .transition()
           .duration(600)
           .style('opacity', 0.7);
 
-        g.selectAll('.slide'+val).filter('.arrow')
-          .transition()
-          .duration(600)
-          .style('opacity', 0.7);}
+        // g.selectAll('.slide'+val).filter('.arrow')
+        //   .transition()
+        //   .duration(600)
+        //   .style('opacity', 0.7);
+      }
 
       };
 

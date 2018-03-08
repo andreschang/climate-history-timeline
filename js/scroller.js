@@ -78,7 +78,7 @@ function scroller() {
         $('.contain-wrap').css('overflow', 'visible');
         $('#click-to-enter').css('display', 'none');
         $('body').css({'overflow':'visible'});
-      }, 2000)
+      }, 3000)
     } else {
         $('.contain-wrap').css('overflow', 'visible');
         $('#click-to-enter').css('display', 'none');
