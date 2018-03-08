@@ -70,8 +70,8 @@ function scroller() {
     });
     // sectionPositions = sectionPositions.map( function(n) {return n});
     containerStart = container.node().getBoundingClientRect().top + window.pageYOffset;
-    $('.contain-wrap').css('overflow', 'visible');
-    $('#click-to-enter').css('display', 'none');
+    $('.contain-wrap').delay(1000).css('overflow', 'visible');
+    $('#click-to-enter').delay(1000).css('display', 'none');
   }
 
   /**
