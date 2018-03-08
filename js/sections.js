@@ -1,6 +1,6 @@
 $(window).on('load', function() { // makes sure the whole site is loaded
-  $('#status').delay(500).fadeOut(); // will first fade out the loading animation
-  $('#preloader').delay(1000).fadeOut('slow'); // will fade out the white DIV that covers the website.
+  // $('#status').delay(500).fadeOut(); // will first fade out the loading animation
+  // $('#preloader').delay(1000).fadeOut('slow'); // will fade out the white DIV that covers the website.
 
 /**
  * scrollVis - encapsulates
@@ -327,7 +327,7 @@ var scrollVis = function () {
     g.selectAll('.slide19').filter('.eventYear').text('1,000,000+ BC');
 
     if (mobile > docWindow) {
-      g.selectAll('.slide0').filter('.quote').attr('transform', 'translate(0,-55)');
+      g.selectAll('.slide0').filter('.quote').attr('transform', 'translate(0,-45)');
     } else {
       g.selectAll('.slide0').filter('.quote').attr('transform', 'translate(0,-80)');
     }
