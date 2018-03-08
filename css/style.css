@@ -216,8 +216,8 @@
 
 .contain-wrap {
   overflow: hidden;
-  width: 200% !important;
-  width: 200% !important;
+  width: 100% !important;
+  width: 100% !important;
   height: 90vh;
 }
 

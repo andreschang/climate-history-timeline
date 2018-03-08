@@ -105,6 +105,7 @@ function scroller() {
       // next section is called only once year is passed
       var callSection = (sectionIndex >= 1) ? sectionIndex-1 : 0
       dispatch.call('active', this, callSection);
+      console.log('new section')
       currentIndex = sectionIndex;
     }
 
