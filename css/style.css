@@ -452,6 +452,7 @@
 }
 
 .img {
+  display: none;
   pointer-events: none;
   position: relative;
   width: 300px;
@@ -488,6 +489,11 @@
 
 #miniTL {
   /*display: none;*/
+}
+
+#sections {
+  padding-left: 12px;
+  padding-right: 30px;
 }
 
 #miniYear {

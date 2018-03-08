@@ -54,12 +54,6 @@ var scrollVis = function () {
 
       var mobile = $(window).width();
       console.log(mobile);
-      if(mobile < docWindow) {
-        svg.attr('id', 'test')
-
-      } else {
-
-      }
     });
   };
 
@@ -253,11 +247,11 @@ $(function() {
         .html(function(d) {return d.desc});
 
 
-              g.append('g').selectAll('quote')
+      g.append('g').selectAll('quote')
       .data(timelineData)
       .enter()
       .append('foreignObject')
-        .attr('y', (height / 2.42)+200)
+        .attr('y', (height / 2.42)+250)
         .attr("width", 510)
         .attr("height", 300)
         .attr('class', function(d, i) {return 'slide'+i+' quote'})
@@ -272,7 +266,6 @@ $(function() {
       .enter()
       .append('text')
       .text('READ MORE')
-      .attr("id", "remove")
       .attr('class', function(d, i) {return 'slide'+i+' arrow'})
       .attr('x', function(d,i) {var qEnd = d3.select('#qEnd'+d.slide);
         var arrowX0 = qEnd.node().getBoundingClientRect().right-340;

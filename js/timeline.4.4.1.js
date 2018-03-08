@@ -1,6 +1,10 @@
 // This code lays out the mainTimeline and miniTimeline
 // base graphics, and all scaling.
 
+// Mobile check
+var mobile = $(window).width();
+var docWindow = 480;
+
 // Timeline Parameters
 var lanes = ["Timeline"],
   laneLength = lanes.length,
@@ -135,12 +139,21 @@ function depthScale(inputNumber) {
 };
 
 // Build timeline frames
-var mainTL = d3.select("#sections")
-  .append("svg")
-  .attr("width", mainWidth+miniWidth+40)
-  .attr("height", mainHeight+mTop+m)
-  .append("g")
-  .attr("transform", "translate(" + (miniWidth+mLeft+m+40) + "," + mTop + ")") // position mainTL
+if (mobile > docWindow) {
+    var mainTL = d3.select("#sections")
+      .append("svg")
+      .attr("width", mainWidth+miniWidth+40)
+      .attr("height", mainHeight+mTop+m)
+      .append("g")
+      .attr("transform", "translate(" + (miniWidth+mLeft+m+40) + "," + mTop + ")") // position mainTL
+} else {
+  var mainTL = d3.select("#sections")
+      .append("svg")
+      .attr("width", mainWidth+miniWidth+40)
+      .attr("height", mainHeight+mTop+m)
+      .append("g")
+      .attr("transform", "translate(" + (miniWidth+mLeft+m+70) + "," + mTop + ")") // position mainTL
+}
 
 
 mainTL.append("rect")
