@@ -1,4 +1,18 @@
 $(window).on('load', function() { // makes sure the whole site is loaded
+
+  var is_chrome = !!window.chrome && !is_opera;
+  var is_explorer= typeof document !== 'undefined' && !!document.documentMode && !isEdge;
+  var is_firefox = typeof window.InstallTrigger !== 'undefined';
+  var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  var is_opera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+  if (is_safari == true) {
+    $('#click-to-enter').css('opacity', '1');
+  } else {
+    $('#click-to-enter').css('display', 'none');
+    $('.container-new').css('overflow-y','visible');
+  }
+
   $('#status').delay(1000).fadeOut(); // will first fade out the loading animation
   $('#preloader').delay(1500).fadeOut('slow'); // will fade out the white DIV that covers the website.
   $('body')
@@ -18,6 +32,9 @@ $(window).on('load', function() { // makes sure the whole site is loaded
   $('#button-enter').click(function(){
    $('#click-to-enter').css('display', 'none');
    $('.container-new').css('overflow-y','visible');
+
+  // console.log(is_safari)
+  // console.log(is_chrome)
 
     });
 
@@ -498,6 +515,7 @@ function display(data) {
     .call(plot);
 
   // setup scroll functionality
+  console.log('setup scroll')
   var scroll = scroller()
     .container(d3.select('#graphic'));
 

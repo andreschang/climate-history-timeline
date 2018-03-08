@@ -56,6 +56,7 @@
 
 .container-new{
   overflow-y: hidden;
+  /*overflow-y: visible;*/
   height: 90vh;
 }
 
@@ -81,13 +82,16 @@
   left: 0;
   right: 0;
   bottom: 0;
+  opacity: 0;
   background-color: #719FA3;
   /* change if the mask should have another color then white */
   z-index: 9999999;
+  /*display:none;*/
   /* makes sure it stays on top */
 }
 #button-enter {
       background-color: rgba(76, 176, 80, 0); /* Green */
+      width: 70%;
     border:10px solid white;
     color: white;
     padding: 30px 32px;
@@ -96,9 +100,9 @@
     display: inline-block;
     font-size: 16px;
     font-size: 2em;
+    font-family: 'ProximaNova', sans-serif;
     border-radius: 50px;
               box-shadow: 0px 1px 10px black;
-    font-family: sans-serif;
 }
 
 #button-enter:hover{
@@ -253,8 +257,20 @@
   fill: url(#endGrad);
 }
 
+#button-enter h1 {
+  font-family: 'ProximaNova-Bold', sans-serif;
+  font-size: 2em;
+}
 
+#button-enter h2 {
+  font-family: 'ProximaNova-Semibold', sans-serif;
+  font-size: 1.6em;
+}
 
+#button-enter p {
+  font-family: 'ProximaNova', sans-serif;
+  font-size: 0.8em;
+}
 
 @media(max-width:480px)  {
   /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
