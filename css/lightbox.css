@@ -24,6 +24,7 @@ html.lb-disable-scrolling {
   z-index: 10000;
   text-align: center;
   line-height: 0;
+  font-family: 'ProximaNova-Regular', sans-serif;
   font-weight: normal;
 }
 
@@ -168,7 +169,6 @@ html.lb-disable-scrolling {
 
 .lb-data .lb-caption {
   font-size: 13px;
-  font-weight: bold;
   line-height: 1em;
 }
 
