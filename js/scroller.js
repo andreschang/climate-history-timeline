@@ -59,6 +59,7 @@ function scroller() {
     // starting position relative to the top
     // of the first section.
     sectionPositions = [];
+    console.log('get sectionPos')
     var startPos;
     sections.each(function (d, i) {
       var top = this.getBoundingClientRect().top;
@@ -69,6 +70,8 @@ function scroller() {
     });
     // sectionPositions = sectionPositions.map( function(n) {return n});
     containerStart = container.node().getBoundingClientRect().top + window.pageYOffset;
+    $('.contain-wrap').css('overflow', 'visible');
+    $('#click-to-enter').css('display', 'none');
   }
 
   /**
@@ -136,6 +139,3 @@ function scroller() {
 
   return scroll;
 }
-
-
-

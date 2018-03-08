@@ -1,44 +1,10 @@
 $(window).on('load', function() { // makes sure the whole site is loaded
-
-  var is_chrome = !!window.chrome && !is_opera;
-  var is_explorer= typeof document !== 'undefined' && !!document.documentMode && !isEdge;
-  var is_firefox = typeof window.InstallTrigger !== 'undefined';
-  var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-  var is_opera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-
-  if (is_safari == true) {
-    $('#click-to-enter').css('opacity', '1');
-  } else {
-    $('#click-to-enter').css('display', 'none');
-    $('.container-new').css('overflow-y','visible');
-  }
-
   $('#status').delay(1000).fadeOut(); // will first fade out the loading animation
   $('#preloader').delay(1500).fadeOut('slow'); // will fade out the white DIV that covers the website.
-  $('body')
-  .delay(1500)
-  .queue(function (next) {
-    $(this).css('overflow', 'visible');
-    next();
-  });
+  $('body').delay(1000).css({'overflow':'visible'});
+})
 
-  $('.contain-wrap')
-  .delay(1500)
-  .queue(function (next) {
-    $(this).css('overflow', 'visible');
-    next();
-  });
-
-  $('#button-enter').click(function(){
-   $('#click-to-enter').css('display', 'none');
-   $('.container-new').css('overflow-y','visible');
-
-  // console.log(is_safari)
-  // console.log(is_chrome)
-
-    });
-
-
+$(document).ready(function(){
 
 /**
  * scrollVis - encapsulates
@@ -291,7 +257,7 @@ $(function() {
       .data(timelineData)
       .enter()
       .append('foreignObject')
-        .attr('y', (height / 2.42)+230)
+        .attr('y', (height / 2.42)+200)
         .attr("width", 510)
         .attr("height", 300)
         .attr('class', function(d, i) {return 'slide'+i+' quote'})
@@ -515,7 +481,6 @@ function display(data) {
     .call(plot);
 
   // setup scroll functionality
-  console.log('setup scroll')
   var scroll = scroller()
     .container(d3.select('#graphic'));
 
@@ -540,6 +505,13 @@ function display(data) {
 // load data and display
 d3.tsv('web_timeline.4.8.tsv', display);
 
-
-
 });
+
+// var is_chrome = !!window.chrome && !is_opera;
+// var is_explorer= typeof document !== 'undefined' && !!document.documentMode && !isEdge;
+// var is_firefox = typeof window.InstallTrigger !== 'undefined';
+// var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+// var is_opera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+// if (is_safari) alert('It looks like you are using Safari! Please allow this page a few seconds to fully load before scrolling.');
+

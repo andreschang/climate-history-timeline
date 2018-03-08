@@ -1,6 +1,5 @@
 /*@import url("/count/35add2");
 */
-
 @font-face {
   font-family: 'Shift';
   src:  url('webfonts/Shift-Bold.eot');
@@ -48,22 +47,10 @@
 }
 
 .navItemWrap {
-      position: absolute;
+    position: absolute;
     top: 166px;
     /* text-align: center; */
     right: 70px;
-}
-
-.container-new{
-  overflow-y: hidden;
-  /*overflow-y: visible;*/
-  height: 90vh;
-}
-
-.enter-screen {
-  text-align: center;
-  height: 100vh;
-  line-height: 100vh;
 }
 
 .navItem {
@@ -76,38 +63,8 @@
   z-index: 100;
 }
 
- #click-to-enter{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-  background-color: #719FA3;
-  /* change if the mask should have another color then white */
-  z-index: 9999999;
-  /*display:none;*/
-  /* makes sure it stays on top */
-}
-#button-enter {
-      background-color: rgba(76, 176, 80, 0); /* Green */
-      width: 70%;
-    border:10px solid white;
-    color: white;
-    padding: 30px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    font-size: 2em;
-    font-family: 'ProximaNova', sans-serif;
-    border-radius: 50px;
-              box-shadow: 0px 1px 10px black;
-}
 
-#button-enter:hover{
-  opacity: .5;
-}
+
 #navBar a {
   text-decoration: inherit;
 }
@@ -257,19 +214,25 @@
   fill: url(#endGrad);
 }
 
-#button-enter h1 {
-  font-family: 'ProximaNova-Bold', sans-serif;
-  font-size: 2em;
+.contain-wrap {
+  overflow: hidden;
+  width: 200% !important;
+  width: 200% !important;
+  height: 90vh;
 }
 
-#button-enter h2 {
-  font-family: 'ProximaNova-Semibold', sans-serif;
-  font-size: 1.6em;
-}
-
-#button-enter p {
-  font-family: 'ProximaNova', sans-serif;
-  font-size: 0.8em;
+ #click-to-enter{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  background-color: #719FA3;
+  /* change if the mask should have another color then white */
+  z-index: 9999999;
+  /*display:none;*/
+  /* makes sure it stays on top */
 }
 
 @media(max-width:480px)  {
@@ -286,7 +249,7 @@
   bottom: 0;
   background-color: #fff;
   /* change if the mask should have another color then white */
-  z-index: 9999999999;
+  z-index: 99;
   /* makes sure it stays on top */
 }
 
@@ -307,8 +270,9 @@
 }
 
   body {
+    overflow-x: hidden;
+    padding-bottom: 800px;
     width: 100vw !important;
-
   }
 
   #graphic {
@@ -514,6 +478,10 @@
   display: none;
 }
 
+#miniYear {
+  display: none;
+}
+
 .navItem {
     float: left;
     display: block;
@@ -526,31 +494,6 @@
     font-family: 'ProximaNova-Bold', sans-serif;
     color: #577A7D;
     z-index: 100;
-}
-
-.contain-wrap {
-  overflow: hidden;
-  width: 200% !important;
-  width: 200% !important;
-  height: 90vh;
-}
-
-/*
-.displaynone {
-   display: none;
-
-}
-*/
-.container {
-  padding-bottom: 400px;
-
-}
-
-button p{
-  font-size: .5em;
-}
-button h1 {
-  font-size: .8em;
 }
 
 }
