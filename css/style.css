@@ -188,6 +188,19 @@
   fill: #a9a9aa;
 }
 
+#byline {
+  font-family: 'ProximaNova-MediumIt', sans-serif;
+  line-height: .75em;
+  font-size: 0.8em;
+  color: #777777;
+}
+
+#bylineLink {
+  color: inherit;
+  text-decoration: inherit;
+  pointer-events: all !important;
+}
+
 .axis path,
 .axis line {
   fill: none;
@@ -303,6 +316,7 @@
 
     #vis svg{
       overflow: initial;
+      /*overflow: visible;*/
     }
 
     #vis .arrow {
@@ -512,6 +526,10 @@
     font-family: 'ProximaNova-Bold', sans-serif;
     color: #577A7D;
     z-index: 100;
+}
+
+#byline {
+  display: none;
 }
 
 }

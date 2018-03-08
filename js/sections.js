@@ -324,7 +324,6 @@ $(function() {
 
     // Custom slide edits
     g.selectAll('.slide0').filter('.eventYear,.arrow').remove();
-    g.selectAll('.slide0').filter('.desc').attr('transform', 'translate(0,-80)');
     g.selectAll('.slide2').filter('.eventYear').text('2000s');
     g.selectAll('.slide4').filter('.desc').attr('height', 328);
     g.selectAll('.slide6').filter('.eventYear').text('Late 1800s');
@@ -340,6 +339,12 @@ $(function() {
     g.selectAll('.slide17').filter('.eventYear').text('130,000-115,000 BC');
     g.selectAll('.slide18').filter('.eventYear').text('237,000 BC');
     g.selectAll('.slide19').filter('.eventYear').text('1,000,000+ BC');
+
+    if (mobile > docWindow) {
+      g.selectAll('.slide0').filter('.quote').attr('transform', 'translate(0,-40)');
+    } else {
+      g.selectAll('.slide0').filter('.quote').attr('transform', 'translate(0,-80)');
+    }
 
     };
 
