@@ -15,14 +15,6 @@ $(window).on('load', function() { // makes sure the whole site is loaded
     next();
   });
 
-    $('.container')
-  .delay(1500)
-  .queue(function (next) {
-    $(this).css('display', 'block');
-    next();
-  });
-
-
 
 
 /**
@@ -417,6 +409,7 @@ $(function() {
           .style('opacity', 0.7);}
 
       };
+
     function getUp(val) {
       return function(progress) {
           var xb = val-1,
