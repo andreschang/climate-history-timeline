@@ -15,6 +15,12 @@ $(window).on('load', function() { // makes sure the whole site is loaded
     next();
   });
 
+  $('#button-enter').click(function(){
+   $('#click-to-enter').css('display', 'none');
+   $('.container-new').css('overflow-y','visible');
+
+    });
+
 
 
 /**

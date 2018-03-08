@@ -54,6 +54,17 @@
     right: 70px;
 }
 
+.container-new{
+  overflow-y: hidden;
+  height: 90vh;
+}
+
+.enter-screen {
+  text-align: center;
+  height: 100vh;
+  line-height: 100vh;
+}
+
 .navItem {
   float: left;
   padding-right:10px;
@@ -64,8 +75,35 @@
   z-index: 100;
 }
 
+ #click-to-enter{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #719FA3;
+  /* change if the mask should have another color then white */
+  z-index: 9999999;
+  /* makes sure it stays on top */
+}
+#button-enter {
+      background-color: rgba(76, 176, 80, 0); /* Green */
+    border:10px solid white;
+    color: white;
+    padding: 30px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-size: 2em;
+    border-radius: 50px;
+              box-shadow: 0px 1px 10px black;
+    font-family: sans-serif;
+}
 
-
+#button-enter:hover{
+  opacity: .5;
+}
 #navBar a {
   text-decoration: inherit;
 }
@@ -490,6 +528,13 @@
 .container {
   padding-bottom: 400px;
 
+}
+
+button p{
+  font-size: .5em;
+}
+button h1 {
+  font-size: .8em;
 }
 
 }
