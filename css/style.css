@@ -235,6 +235,16 @@
   /* makes sure it stays on top */
 }
 
+#noLandscape{
+  opacity: 0;
+  position: fixed;
+  left: 34%;
+  top: 40%;
+  text-anchor: middle;
+  font-family: 'ProximaNova-Bold', sans-serif;
+  font-size: 3em;
+}
+
 @media(max-width:480px)  {
   /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
   navItemWrap {
@@ -278,6 +288,7 @@
   #graphic {
     padding: 0px;
     padding-top: 15px;
+    padding-bottom: 800px;
   }
 
   tspan {
@@ -475,7 +486,7 @@
 }
 
 #miniTL {
-  display: none;
+  /*display: none;*/
 }
 
 #miniYear {
@@ -498,7 +509,17 @@
 
 }
 
+@media(max-height:400px) {
 
+  #noLandscape {
+    opacity: 1;
+  }
+
+  #graphic {
+    opacity: 0.3;
+  }
+
+}
 
 
 
