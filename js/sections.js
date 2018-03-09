@@ -15,6 +15,7 @@ var scrollVis = function () {
   // constants to define the size
   // and margins of the vis area.
   var width = 560;
+  // var width = 600;
   var height = 520;
   var mobile = $(window).width();
   var newHeight = $(window).height();

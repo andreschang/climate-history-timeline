@@ -86,7 +86,7 @@
 }*/
 
 #graphic {
-  width: 800px;
+  width: 600px;
   padding-left: 60px;
   padding-top: 0px;
   font-family: 'ProximaNova-Regular', sans-serif;
@@ -323,12 +323,6 @@
     #vis .arrow {
      fill: rgba(255, 255, 255, 0);
      pointer-events: none;
-    }
-
-    #test {
-      overflow: visible;
-      height: 100px;
-      width: 100px;
     }
 
     foreignObject div  p {
