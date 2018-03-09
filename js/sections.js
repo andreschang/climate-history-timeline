@@ -20,7 +20,7 @@ var scrollVis = function () {
   var mobile = $(window).width();
   var newHeight = $(window).height();
   var docWindow = 480;
-  var top_height = 800;
+  var top_height = 710;
   var margin = { top: 0, left: 10, bottom: 40, right: 10 };
 
   var lastIndex = -1;
@@ -212,7 +212,7 @@ var scrollVis = function () {
       .append('foreignObject')
         .attr('y', (height / 2.42)+100)
         .attr("width", 510)
-        .attr("height", 300)
+        .attr("height", 330)
         .attr('class', function(d, i) {return 'slide'+i+' quote'})
         .style('opacity', 0)
       .append('xhtml:div')
