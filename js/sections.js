@@ -484,6 +484,11 @@ function display(data) {
     plot.activate(index);
   });
 
+
+  for (i = 0; i < 16; i++) {
+    console.log($('.arrow')[i].getBoundingClientRect())
+  }
+
   scroll.on('progress', function (index, progress) {
     plot.update(index, progress);
   });
