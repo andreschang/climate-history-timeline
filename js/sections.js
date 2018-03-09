@@ -254,13 +254,13 @@ var scrollVis = function () {
       .attr('x', function(d,i) {var qEnd = d3.select('#qEnd'+d.slide);
         var arrowX0 = qEnd.node().getBoundingClientRect().right-340;
         var arrowX = arrowX0 <= 370 ? arrowX0 : 1;
-        console.log(arrowX);
+        console.log("arrowx "+arrowX);
         return arrowX})
       .attr('y', function(d,i) {var qEnd = d3.select('#qEnd'+d.slide);
         var arrowX0 = qEnd.node().getBoundingClientRect().right-340;
         var arrowY0 = qEnd.node().getBoundingClientRect().bottom-8;
         var arrowY = arrowX0 <= 370 ? arrowY0 : arrowY0+36;
-        console.log(arrowY);
+        console.log("arrowy "+arrowY);
         return arrowY})
       .on("click", function(d, i){
         var sClass = '.slide'+d.slide;
