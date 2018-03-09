@@ -104,7 +104,11 @@ function scroller() {
     sectionIndex = Math.min(sections.size(), sectionIndex);
 
     d3.select("#miniLocator")
-      .attr("transform", "translate(0,"+miniLocatorScale((yLoc+5))+")");
+      .attr("transform",   function() {
+        var translateY=miniLocatorScale((yLoc+5)),
+        translateY2 = translateY < 370 ? translateY : 370;
+        return "translate(0,"+translateY2+")"  
+        });
     d3.select("#miniYear")
       .text(function() {
         var adj = yLoc <= 5460 ? 5 : 86,
