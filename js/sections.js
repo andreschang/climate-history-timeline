@@ -20,7 +20,7 @@ var scrollVis = function () {
   var mobile = $(window).width();
   var newHeight = $(window).height();
   var docWindow = 480;
-  var top_height = 710;
+  var top_height = 730;
   var margin = { top: 0, left: 10, bottom: 40, right: 10 };
 
   var lastIndex = -1;
