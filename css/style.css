@@ -301,6 +301,7 @@
   }
 
   #graphic {
+    width: 800px;
     padding: 0px;
     padding-top: 15px;
     padding-bottom: 800px;
