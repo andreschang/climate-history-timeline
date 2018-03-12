@@ -79,13 +79,11 @@ function scroller() {
         $('#status').fadeOut(400);
         $('#preloader').fadeOut(800);
         $('.contain-wrap').css('overflow', 'visible');
-        $('#click-to-enter').css('display', 'none');
         $('body').css({'overflow':'visible'});
       }, 3000)
     } else {
         $('#preloader').fadeOut(600);
         $('.contain-wrap').css('overflow', 'visible');
-        $('#click-to-enter').css('display', 'none');
         $('body').css({'overflow':'visible'});
     }
   }

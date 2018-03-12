@@ -1,3 +1,33 @@
+function detectIE() {
+    var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+        // IE 10 or older => return version number
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    var trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+        // IE 11 => return version number
+        var rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    var edge = ua.indexOf('Edge/');
+    if (edge > 0) {
+       // Edge (IE 12+) => return version number
+       return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+    }
+
+    // other browser
+    return false;
+}
+
+if ( detectIE() == true ) {
+  $('#noIE').css('opacity', '1');
+} else {
+
 $(window).on('load', function() { // makes sure the whole site is loaded
   // $('#status').delay(500).fadeOut(); // will first fade out the loading animation
   // $('#preloader').delay(1000).fadeOut('slow'); // will fade out the white DIV that covers the website.
@@ -499,6 +529,4 @@ function display(data) {
 d3.tsv('web_timeline.4.8.tsv', display);
 
 });
-
-// if (is_safari) alert('It looks like you are using Safari! Please allow this page a few seconds to fully load before scrolling.');
-
+}
