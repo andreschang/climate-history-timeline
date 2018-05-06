@@ -180,7 +180,7 @@ miniTL.append("rect")
   .attr("fill", "#edf1f2");
 
 // Load data and fill timelines
-d3.tsv("spreadsheet.tsv", function(items) {
+d3.tsv("Spreadsheet.tsv", function(items) {
 // d3.tsv("timeline.5.2.tsv", function(items) {
 
   var laneStyle = 0;
