@@ -1,35 +1,28 @@
-/*@import url("/count/35add2");
-*/
-@font-face {
-  font-family: 'Shift';
-  src:  url('webfonts/Shift-Bold.eot');
-  src:  url('webfonts/Shift-Bold.woff2') format('woff2'),
-        url('webfonts/Shift-Bold.woff') format('woff');
-}
 
-@font-face {font-family: 'ProximaNova-Bold';src: url('webfonts/35ADD2_0_0.eot');src: url('webfonts/35ADD2_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_0_0.woff2') format('woff2'),url('webfonts/35ADD2_0_0.woff') format('woff'),url('webfonts/35ADD2_0_0.ttf') format('truetype');}
-@font-face {font-family: 'ProximaNova-Medium';src: url('webfonts/35ADD2_1_0.eot');src: url('webfonts/35ADD2_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_1_0.woff2') format('woff2'),url('webfonts/35ADD2_1_0.woff') format('woff'),url('webfonts/35ADD2_1_0.ttf') format('truetype');}
-@font-face {font-family: 'ProximaNova-MediumIt';src: url('webfonts/35ADD2_2_0.eot');src: url('webfonts/35ADD2_2_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_2_0.woff2') format('woff2'),url('webfonts/35ADD2_2_0.woff') format('woff'),url('webfonts/35ADD2_2_0.ttf') format('truetype');}
-@font-face {font-family: 'ProximaNova-Regular';src: url('webfonts/35ADD2_3_0.eot');src: url('webfonts/35ADD2_3_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_3_0.woff2') format('woff2'),url('webfonts/35ADD2_3_0.woff') format('woff'),url('webfonts/35ADD2_3_0.ttf') format('truetype');}
-@font-face {font-family: 'ProximaNova-Semibold';src: url('webfonts/35ADD2_4_0.eot');src: url('webfonts/35ADD2_4_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_4_0.woff2') format('woff2'),url('webfonts/35ADD2_4_0.woff') format('woff'),url('webfonts/35ADD2_4_0.ttf') format('truetype');}
-@font-face {font-family: 'ProximaNova-SemiboldIt';src: url('webfonts/35ADD2_5_0.eot');src: url('webfonts/35ADD2_5_0.eot?#iefix') format('embedded-opentype'),url('webfonts/35ADD2_5_0.woff2') format('woff2'),url('webfonts/35ADD2_5_0.woff') format('woff'),url('webfonts/35ADD2_5_0.ttf') format('truetype');}
 
 .container {
   width: 100%;
 }
 
-.logo {
+/*.logo {
   height:76px;
   padding-left: 20px
-}
-.menu {
-  opacity: 0;
+}*/
 
+#globe {
+  position: relative;
+  z-index: 0;
+  height: 600px;
+  width: 100%;
+  margin-top: -85px;
+  margin-left: 48%;
 }
 
-.menu-overlay {
- display: none;
+.globeImg {
+  width: 500px;
+  padding: 0px;
 }
+
 #header {
   position: relative;
   width: 100%;
@@ -58,7 +51,7 @@
   padding-right:10px;
   padding-left:24px;
   overflow:hidden;
-  font-family: 'ProximaNova-Bold', sans-serif;
+  font-family: 'Oxygen', sans-serif;
   color: #577A7D;
   z-index: 100;
 }
@@ -90,7 +83,8 @@
   padding-left: 60px;
   padding-top: 0px;
   padding-bottom: 60px;
-  font-family: 'ProximaNova-Regular', sans-serif;
+  margin-top: -595px;
+  font-family: 'Oxygen', sans-serif;
   font-size: 100%;
 }
 
@@ -101,7 +95,7 @@
   z-index: 80;
   font-size: 0.9em;
   font-weight: 300;
-  fill: #f6a355;
+  fill: #3a96b8;
   text-anchor: middle;
   /*background: #a4abb5;*/
 }
@@ -133,22 +127,20 @@
 }
 
 #vis .eventYear{
-  font-family: 'ProximaNova-Regular', sans-serif;
   font-size:1.7em;
-  fill: #f6a355;
+  fill: #3a96b8;
   text-anchor: left;
 }
 
 #vis .eventDepth{
-  font-family: 'ProximaNova-Regular', sans-serif;
   font-size:1.1em;
   font-weight: 300;
-  fill: #f6a355;
+  fill: #3a96b8;
   text-anchor: left;
 }
 
 #vis .title {
-  font-family: Shift;
+  font-weight: bold;
   font-size:2.8em;
   line-height: 1.1em;
   /*font-weight: 500;*/
@@ -157,41 +149,34 @@
 
 
 #vis .desc{
-  font-family: 'ProximaNova-Regular', sans-serif;
   font-size:1.15em;
   line-height: 1.2em;
   text-anchor: left;
 }
 
 #vis h1 {
-  font-family: 'ProximaNova-Medium', sans-serif;
   font-size:1.3em;
   line-height: 1.4em;
 }
 
 #vis .quote {
-  /*font-family: 'Lato', sans-serif;*/
-  font-family: 'ProximaNova-MediumIt', sans-serif;
-  /*font-size:1.6em;*/
-  font-size:1.55em;
+  font-size:1.45em;
   line-height: 1.25em;
   text-anchor: left;
 }
 
 #vis .arrow {
-  font-family: 'ProximaNova-Semibold', sans-serif;
   font-size: 1.28em;
-  fill: #f6a355;
+  fill: #3a96b8;
 }
 
 #vis .fReadArrow {
-  font-family: 'ProximaNova-Semibold', sans-serif;
   font-size: 1.08em;
   fill: #a9a9aa;
 }
 
 #byline {
-  font-family: 'ProximaNova-MediumIt', sans-serif;
+  font-family: 'Oxygen', sans-serif;
   line-height: .75em;
   font-size: 0.8em;
   color: #777777;
@@ -211,7 +196,7 @@
 }
 
 .event0 {
-  fill: #719FA3;
+  fill: #D1E2E8;
   opacity: 0.5;
 }
 
@@ -225,8 +210,13 @@
   opacity: 0.5;
 }
 
+.event02018 {
+  fill: #1B4757;
+}
+
 .event0-1000000 {
   fill: url(#endGrad);
+  opacity: 1.0 !important;
 }
 
 .contain-wrap {
@@ -243,7 +233,7 @@
   width: 33%;
   top: 40%;
   text-anchor: middle;
-  font-family: 'ProximaNova-Bold', sans-serif;
+  font-family: 'Oxygen', sans-serif;
   font-size: 3em;
 }
 
@@ -254,7 +244,7 @@
   width: 60%;
   top: 30%;
   text-anchor: middle;
-  font-family: 'ProximaNova-Medium', sans-serif;
+  font-family: 'Oxygen', sans-serif;
   font-size: 1.4em;
   z-index: 100;
 }
@@ -316,6 +306,10 @@ p {
     padding: 0px;
     padding-top: 15px;
     padding-bottom: 800px;
+  }
+
+  #globe {
+    margin-left: 60%;
   }
 
   tspan {
@@ -412,7 +406,7 @@ p {
     font-size: 75px;
     margin-bottom: 34px;
     overflow: hidden;
-    font-family: 'ProximaNova-Bold', sans-serif;
+    font-family: 'Oxygen', sans-serif;
     color: #577A7D;
     z-index: 100;
 }

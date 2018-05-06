@@ -160,7 +160,7 @@ mainTL.append("rect")
   .attr("x", .12*xMain(1))
   .attr("width", .75*xMain(1))
   .attr("height", mainHeight-(mainScale(-1000000)-mainScale(-600000)))
-  .attr("fill", "#edf1f2");
+  .attr("fill", "#1B4757");
 
 var miniTL = d3.select("#miniTL")
   .append("svg")
@@ -177,7 +177,7 @@ miniTL.append("rect")
   // height edited to match limit of miniBox slider
   // .attr("height", (miniHeight-16))
   .attr("height", (miniHeight-(yMini(-400000))))
-  .attr("fill", "#edf1f2");
+  .attr("fill", "#1B4757");
 
 // Load data and fill timelines
 d3.tsv("Spreadsheet.tsv", function(items) {
@@ -234,7 +234,7 @@ d3.tsv("Spreadsheet.tsv", function(items) {
     .attr("id", "miniBox")
     .attr("width", .85*xMini(1))
     .attr("height", 4)
-    .attr("fill", "#F6A04D")
+    .attr("fill", "#3a96b8")
     .attr("opacity", .5)
     .attr();
 
@@ -245,7 +245,7 @@ d3.tsv("Spreadsheet.tsv", function(items) {
     .attr("yMini", 2)
     .attr("stroke-width", 1)
     .attr("opacity", .5)
-    .attr("stroke", "#F6A04D");
+    .attr("stroke", "#3a96b8");
 
   miniLocator.append("text")
     .attr("id", "miniYear")

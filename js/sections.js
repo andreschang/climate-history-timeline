@@ -455,6 +455,8 @@ function display(data) {
   scroll.on('active', function (index) {
     // highlight current step text
     d3.selectAll('.step')
+      .transition()
+      .duration(200)
       .style('opacity', function (d, i) { return i === index ? 1 : 0.4; });
 
     // activate current section
