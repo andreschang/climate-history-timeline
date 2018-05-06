@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <meta name="viewport" content="width=device-width">
+  <title>Climate History Network Timeline</title>
+  <meta property="og:title" content="Climate History Timeline"/>
+  <meta property="og:type" content="website"/>
+  <!-- <meta property="og:url" content="http://arctictimeline.org" /> -->
+  <!-- <meta property="og:image" content="http://arctictimeline.org/images/arctic_timeline_screenshot-4.png"/> -->
+<!--   <meta property="og:description" content="This interactive web application presents an overview of climate history, human exploration of the Arctic, and Arctic culture. By scrolling down the "ice core," viewers of An Arctic Timeline are confronted with the profound entanglement of humans and climate."/> -->
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="css/lightbox.css"/>
+  <svg height="10" width="10" xmlns="http://www.w3.org/2000/svg" version="1.1"> <defs>
+    <linearGradient id="endGrad" x1="0%" y1="0%" x2="0%" y2="85%">
+      <stop offset="0%" style="stop-color:rgb(113,159,163);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(113,159,163);stop-opacity:0" />
+    </linearGradient>
+     </defs> </svg>
+</head>
+<body>
+<div class="contain-wrap">
+<div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+<div id = "noLandscape">
+  Please rotate phone
+  </div>
+<div id = "noIE">
+  <p>This application is not supported by Internet Explorer. Please visit <i>An Arctic Timeline</i> on Google Chrome, Safari, or Firefox. Thank you.</p>
+  </div>
+
+<div class="container">
+  <div id = 'header'>
+    <a href = "http://www.climatehistory.net/"><img src="images/chn_logo.temp.png" class="logo" alt="Climate History Network logo"></a>
+  </div>
+
+
+  <div id='graphic'>
+    <div id='miniTL'>
+    </div>
+    <div id='sections'>
+    </div>
+    <div id='vis'>
+    </div>
+    <div id="extra-space">
+    </div>
+  </div>
+
+<!--   <div id = "footer">
+    <a href= "http://climatemuseum.org/">THE CLIMATE MUSEUM</a>
+  </div> -->
+</div>
+</div>
+
+<script type="application/javascript" src="js/d3.min.js"></script>
+<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="application/javascript" src="js/lightbox-plus-jquery.js"></script>
+<script type="application/javascript" src="js/timeline.4.4.1.js"></script>
+<script type="application/javascript" src="js/scroller.js"></script>
+<script type="application/javascript" src="js/sections.js"></script>
+</body>
+</html>
