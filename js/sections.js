@@ -30,7 +30,7 @@ $(window).on('load', function() { // makes sure the whole site is loaded
 var scrollVis = function () {
   // constants to define the size
   // and margins of the vis area.
-  var width = 560;
+  var width = 620;
   var height = 520;
   var mobile = $(window).width();
   var newHeight = $(window).height();
@@ -269,7 +269,7 @@ var scrollVis = function () {
         return arrowX})
       .attr('y', function(d,i) {var qEnd = d3.select('#qEnd'+d.slide);
         var arrowX0 = qEnd.node().getBoundingClientRect().right-340;
-        var arrowY0 = qEnd.node().getBoundingClientRect().bottom-8;
+        var arrowY0 = qEnd.node().getBoundingClientRect().bottom-6;
         var arrowY = arrowX0 <= 370 ? arrowY0 : arrowY0+36;
         // console.log("arrowy "+arrowY);
         return arrowY})
