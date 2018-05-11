@@ -77,7 +77,7 @@ var scrollVis = function () {
    */
 
   var setupVis = function (timelineData) {
-    if(mobile > docWindow){
+   if(mobile > docWindow){
     g.append('g').selectAll('img')
       .data(timelineData.filter(function(d) {return d.imgFile != ''}))
       .enter()
@@ -103,16 +103,7 @@ var scrollVis = function () {
       .on("mouseover", imageMouseOver)
       .on("mouseout", imageMouseOut)
       .style('opacity', 0);
-      } else {
 
-     g.append('g').selectAll('img')
-      .data(timelineData.filter(function(d) {return d.imgFile != ''}))
-      .enter()
-      .append('svg:image')
-      .attr('class', function(d, i) {return 'slide'+d.slide+' img'});
-      }
-
-    if(mobile > docWindow) {
     g.append('g').selectAll('eventDepth')
       .data(timelineData)
       .enter()
@@ -136,7 +127,7 @@ var scrollVis = function () {
         return( showYear );})
       .style('opacity', 0);
 
-     g.append('g').selectAll('title')
+    g.append('g').selectAll('title')
       .data(timelineData)
       .enter()
       .append('foreignObject')
@@ -150,46 +141,6 @@ var scrollVis = function () {
       .append('xhtml:div')
         .html(function(d) {return d.title});
 
-      } else {
-
-      g.append('g').selectAll('title')
-      .data(timelineData)
-      .enter()
-      .append('foreignObject')
-        // .attr('y', (height / 2.42)+100)
-        .attr('y', (height / 5)+175)
-        .attr('x', 0)
-        .attr("width", 400)
-        .attr("height", 300)
-        .attr('class', function(d, i) {return 'slide'+i+' title'})
-        .style('opacity', 0)
-      .append('xhtml:div')
-        .html(function(d) {return d.title});
-
-
-          g.append('g').selectAll('eventDepth')
-      .data(timelineData)
-      .enter()
-      .append('text')
-      .attr('class', function(d, i) {return 'slide'+i+' eventDepth'})
-      .attr('y', (height / 31)+ 170)
-      .attr('x', 0)
-      .text(function(d) {
-        var depth = d.depthm <= 0.0 ? d.depthm+' meters / '+d.depthmi+' miles' : '';
-        return depth})
-      .style('opacity', 0);
-
-    g.append('g').selectAll('eventYear')
-      .data(timelineData)
-      .enter()
-      .append('text')
-      .attr('class', function(d, i) {return 'slide'+i+' eventYear'})
-      .attr('y', (height / 10.8)+190)
-      .attr('x', 0)
-      .text(function(d) { return d.displayYr})
-      .style('opacity', 0);
-      }
-
     g.append('g').selectAll('fRead')
       .data(timelineData)
       .enter()
@@ -202,8 +153,7 @@ var scrollVis = function () {
       .append('xhtml:div')
         .html(function(d) {return "<h1>Resources</h1>"+d.furtherReading});
 
-    if(mobile > docWindow) {
-      g.append('g').selectAll('desc')
+    g.append('g').selectAll('desc')
       .data(timelineData)
       .enter()
       .append('foreignObject')
@@ -215,7 +165,7 @@ var scrollVis = function () {
       .append('xhtml:div')
         .html(function(d) {return d.desc});
 
-        g.append('g').selectAll('quote')
+    g.append('g').selectAll('quote')
       .data(timelineData)
       .enter()
       .append('foreignObject')
@@ -228,33 +178,6 @@ var scrollVis = function () {
       .append('xhtml:div')
         .html(function(d) {return '<p>'+d.quote+'</p>'});
         // .html(function(d) {return d.quote});
-
-    } else {
-
-      g.append('g').selectAll('desc')
-      .data(timelineData)
-      .enter()
-      .append('foreignObject')
-        .attr('class', function(d, i) {return 'slide'+i+' desc'})
-        .style('opacity', 0);
-
-
-      g.append('g').selectAll('quote')
-      .data(timelineData)
-      .enter()
-      .append('foreignObject')
-        .attr('y', (height / 2.42)+250)
-        // .attr("width", 510)
-        // .attr("height", 500)
-        .attr("width", 425)
-        .attr("height", 750)
-        .attr('class', function(d, i) {return 'slide'+i+' quote'})
-        .style('opacity', 0)
-      .append('xhtml:div')
-        // .html(function(d) {return d.quote});
-        .html(function(d) {return '<p>'+d.mobileQuote+'</p>'});
-    }
-
 
     g.append('g').selectAll('arrows')
       .data(timelineData)
@@ -280,7 +203,7 @@ var scrollVis = function () {
           .duration(0)
           .attr('pointer-events', 'none')
           .style('opacity', 0);
-        g.selectAll(sClass).filter('.desc, .fReadArrow')
+        g.selectAll(sClass).filter('.desc, .fReadArrow, .au')
           .transition()
           .duration(200)
           .attr('pointer-events', 'all')
@@ -300,10 +223,12 @@ var scrollVis = function () {
       .text('RESOURCES')
       .attr('class', function(d) {return 'slide'+d.slide+' fReadArrow fR'})
       .attr('x', 1)
-      .attr('y', 638)
+      .attr('y', function(d,i) {var dEnd = d3.select('#dEnd'+d.slide);
+        var fReadY = dEnd.node().getBoundingClientRect().bottom+80;
+        return fReadY})
       .on("click", function(d){
         var sClass = '.slide'+d.slide;
-        g.selectAll(sClass).filter('.desc,.fReadArrow')
+        g.selectAll(sClass).filter('.desc,.fReadArrow,.au')
           .transition()
           .duration(0)
           .attr('pointer-events', 'none')
@@ -319,9 +244,102 @@ var scrollVis = function () {
       .attr('height', 140)
       .style('opacity', 0);
 
+    g.append('g').selectAll('author')
+      .data(timelineData)
+      .enter()
+      .append('foreignObject')
+      .attr('class', function(d, i) {return 'slide'+i+' author au'})
+      .attr('y', function(d,i) {var dEnd = d3.select('#dEnd'+d.slide);
+        var authorY = dEnd.node().getBoundingClientRect().bottom+22;
+        return authorY})
+        // .attr('class', function(d, i) {return 'slide'+i+' author'})
+        // .attr('y', function(d,i) {var qEnd = d3.select('#qEnd'+d.slide);
+        // var arrowX0 = qEnd.node().getBoundingClientRect().right-340;
+        // var arrowY0 = qEnd.node().getBoundingClientRect().bottom+28;
+        // var arrowY = arrowX0 <= 370 ? arrowY0 : arrowY0+36;
+        // // console.log("arrowy "+arrowY);
+        // return arrowY})      
+        .attr('x', 1)
+        .attr('width', 510)
+        .attr('height', 150)
+        .style('opacity', 0)
+      .append('xhtml:div')
+      // .text(function(d) {return "By "+d.author+", "+d.authorTitle})
+        .html(function(d) {return "<p>By "+d.author+", "+d.authorTitle+"</p><p>"
+          +d.affiliation+"</p>"});
+
+    } else {
+
+    g.append('g').selectAll('img')
+      .data(timelineData.filter(function(d) {return d.imgFile != ''}))
+      .enter()
+      .append('svg:image')
+      .attr('class', function(d, i) {return 'slide'+d.slide+' img'});
+
+
+    g.append('g').selectAll('title')
+      .data(timelineData)
+      .enter()
+      .append('foreignObject')
+        // .attr('y', (height / 2.42)+100)
+        .attr('y', (height / 5)+175)
+        .attr('x', 0)
+        .attr("width", 400)
+        .attr("height", 300)
+        .attr('class', function(d, i) {return 'slide'+i+' title'})
+        .style('opacity', 0)
+      .append('xhtml:div')
+        .html(function(d) {return d.title});
+
+
+    g.append('g').selectAll('eventDepth')
+      .data(timelineData)
+      .enter()
+      .append('text')
+      .attr('class', function(d, i) {return 'slide'+i+' eventDepth'})
+      .attr('y', (height / 31)+ 170)
+      .attr('x', 0)
+      .text(function(d) {
+        var depth = d.depthm <= 0.0 ? d.depthm+' meters / '+d.depthmi+' miles' : '';
+        return depth})
+      .style('opacity', 0);
+
+    g.append('g').selectAll('eventYear')
+      .data(timelineData)
+      .enter()
+      .append('text')
+      .attr('class', function(d, i) {return 'slide'+i+' eventYear'})
+      .attr('y', (height / 10.8)+190)
+      .attr('x', 0)
+      .text(function(d) { return d.displayYr})
+      .style('opacity', 0);
+
+    g.append('g').selectAll('desc')
+      .data(timelineData)
+      .enter()
+      .append('foreignObject')
+        .attr('class', function(d, i) {return 'slide'+i+' desc'})
+        .style('opacity', 0);
+
+    g.append('g').selectAll('quote')
+      .data(timelineData)
+      .enter()
+      .append('foreignObject')
+        .attr('y', (height / 2.42)+250)
+        // .attr("width", 510)
+        // .attr("height", 500)
+        .attr("width", 425)
+        .attr("height", 750)
+        .attr('class', function(d, i) {return 'slide'+i+' quote'})
+        .style('opacity', 0)
+      .append('xhtml:div')
+        // .html(function(d) {return d.quote});
+        .html(function(d) {return '<p>'+d.mobileQuote+'</p>'});
+    }
+
 
     // Custom slide edits global
-    g.selectAll('.slide0').filter('.eventYear,.arrow').remove();
+    g.selectAll('.slide0').filter('.eventYear,.arrow,.author').remove();
     g.selectAll('.slide'+(timelineData.length-1)).remove()
     
     if (mobile > docWindow) {
@@ -358,7 +376,7 @@ var scrollVis = function () {
         g.selectAll(':not(.slide'+val+')')
           .attr('pointer-events', 'none');
 
-        g.selectAll('.slide'+val).filter(':not(.desc)').filter(':not(.fR)')
+        g.selectAll('.slide'+val).filter(':not(.desc)').filter(':not(.fR)').filter(':not(.au)')
           .transition()
           .duration(600)
           .style('opacity', 1.0);
